@@ -1,0 +1,230 @@
+@import "tailwindcss";
+
+:root {
+  --ivory: #fff7e6;
+  --ink: #3a1016;
+  --gold: #c99a1e;
+  --gold-soft: #f0d78c;
+  --maroon: #7a0f24;
+}
+
+@theme inline {
+  --color-ivory: var(--ivory);
+  --color-ink: var(--ink);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+  --color-maroon: var(--maroon);
+  --font-serif: var(--font-cormorant);
+  --font-script: var(--font-script);
+  --font-sans: var(--font-inter);
+  --font-tamil: var(--font-tamil);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  background: var(--ivory);
+  color: var(--ink);
+  font-family: var(--font-inter), sans-serif;
+  overflow-x: hidden;
+}
+
+.gold-text {
+  background: linear-gradient(100deg, #a8801a 10%, #f1d97a 40%, #c9a227 60%, #a8801a 90%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 6s linear infinite;
+}
+@keyframes shimmer { to { background-position: 200% center; } }
+
+.paper {
+  background-image: radial-gradient(rgba(201,162,39,.08) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; }
+}
+
+.font-tamil { font-family: var(--font-tamil), serif; }
+
+/* South Indian temple-border strip (diamonds + dots) */
+.temple-border {
+  height: 14px;
+  background-repeat: repeat-x;
+  background-position: center;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='28' height='14' viewBox='0 0 28 14'%3E%3Cpath d='M0 7 L7 0 L14 7 L7 14Z M14 7 L21 0 L28 7 L21 14Z' fill='none' stroke='%23c99a1e' stroke-width='1'/%3E%3Ccircle cx='7' cy='7' r='1.6' fill='%23c99a1e'/%3E%3Ccircle cx='21' cy='7' r='1.6' fill='%23c99a1e'/%3E%3C/svg%3E");
+}
+
+/* Modern-minimal palette, scoped to .theme-modern — overrides the tokens above
+   for the /modern page only. Never applied on the South Indian page. */
+.theme-modern {
+  --ivory: #fffaf3;
+  --ink: #2a2420;
+  --gold: #d79f3f;
+  --gold-soft: #f6dfa3;
+  --maroon: #5c4f6e;
+  --rose: #e8807e;
+  --rose-soft: #f7c2c0;
+  --violet: #9b6fd6;
+  --violet-soft: #e2cdf5;
+  --sky: #4fb3c9;
+  --sky-soft: #bfe9ef;
+  position: relative;
+  isolation: isolate;
+}
+
+/* Vivid multi-colour shadows for glowing hover states. */
+.modern-glow-gold { box-shadow: 0 10px 40px -8px color-mix(in srgb, var(--gold) 55%, transparent); }
+.modern-glow-rose { box-shadow: 0 10px 40px -8px color-mix(in srgb, var(--rose) 55%, transparent); }
+.modern-glow-violet { box-shadow: 0 10px 40px -8px color-mix(in srgb, var(--violet) 55%, transparent); }
+.modern-glow-sky { box-shadow: 0 10px 40px -8px color-mix(in srgb, var(--sky) 55%, transparent); }
+
+/* Ambient gradient backdrop + film-grain, fixed behind the whole /modern
+   page for a premium, alive feel instead of flat white. The base itself is
+   a static layered colour mesh (not flat ivory, and not filter-animated —
+   animating `filter` over a huge fixed layer with several blurred children
+   is expensive to recompute every frame and was the main source of visible
+   stutter/flicker); the orbs and aurora below still keep it moving. */
+.modern-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 70vmax 55vmax at 12% 15%, color-mix(in srgb, var(--gold-soft) 65%, transparent), transparent 60%),
+    radial-gradient(ellipse 65vmax 60vmax at 88% 12%, color-mix(in srgb, var(--sky-soft) 65%, transparent), transparent 60%),
+    radial-gradient(ellipse 65vmax 60vmax at 10% 90%, color-mix(in srgb, var(--rose-soft) 65%, transparent), transparent 60%),
+    radial-gradient(ellipse 70vmax 60vmax at 90% 92%, color-mix(in srgb, var(--violet-soft) 65%, transparent), transparent 60%),
+    radial-gradient(ellipse 80vmax 70vmax at 50% 50%, color-mix(in srgb, var(--gold-soft) 45%, transparent), transparent 65%),
+    var(--ivory);
+}
+.modern-bg::before,
+.modern-bg::after {
+  content: "";
+  position: absolute;
+  width: 65vmax;
+  height: 65vmax;
+  border-radius: 9999px;
+  filter: blur(80px);
+}
+.modern-bg::before {
+  top: -15vmax;
+  left: -10vmax;
+  background: radial-gradient(circle, color-mix(in srgb, var(--rose) 55%, transparent), transparent 70%);
+  opacity: 0.5;
+  animation: driftA 22s ease-in-out infinite;
+}
+.modern-bg::after {
+  bottom: -20vmax;
+  right: -12vmax;
+  background: radial-gradient(circle, color-mix(in srgb, var(--sky) 55%, transparent), transparent 70%);
+  opacity: 0.5;
+  animation: driftB 27s ease-in-out infinite;
+}
+.modern-bg .modern-bg-orb {
+  position: absolute;
+  top: 30%;
+  left: 55%;
+  width: 55vmax;
+  height: 55vmax;
+  border-radius: 9999px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--violet) 55%, transparent), transparent 70%);
+  filter: blur(95px);
+  opacity: 0.5;
+  animation: driftC 32s ease-in-out infinite;
+}
+.modern-bg .modern-bg-orb2 {
+  position: absolute;
+  top: -12vmax;
+  right: -10vmax;
+  width: 50vmax;
+  height: 50vmax;
+  border-radius: 9999px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--gold) 55%, transparent), transparent 70%);
+  filter: blur(85px);
+  opacity: 0.5;
+  animation: driftD 24s ease-in-out infinite;
+}
+.modern-bg .modern-bg-orb3 {
+  position: absolute;
+  bottom: -14vmax;
+  left: 20%;
+  width: 48vmax;
+  height: 48vmax;
+  border-radius: 9999px;
+  background: radial-gradient(circle, color-mix(in srgb, var(--rose) 50%, transparent), transparent 70%);
+  filter: blur(85px);
+  opacity: 0.45;
+  animation: driftA 29s ease-in-out infinite reverse;
+}
+.modern-bg .modern-bg-aurora {
+  position: absolute;
+  inset: -20%;
+  background: linear-gradient(115deg, transparent 10%, color-mix(in srgb, var(--sky) 35%, transparent) 30%, transparent 45%, color-mix(in srgb, var(--violet) 32%, transparent) 60%, transparent 75%, color-mix(in srgb, var(--gold) 32%, transparent) 90%, transparent 100%);
+  background-size: 250% 250%;
+  opacity: 0.6;
+  mix-blend-mode: soft-light;
+  animation: auroraSweep 18s ease-in-out infinite;
+}
+@keyframes auroraSweep {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes driftA {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(8vw, 6vh) scale(1.2); }
+}
+@keyframes driftB {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-7vw, -8vh) scale(1.15); }
+}
+@keyframes driftC {
+  0%, 100% { transform: translate(-50%, -40%) scale(1); }
+  50% { transform: translate(-58%, -45%) scale(1.25); }
+}
+@keyframes driftD {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-6vw, 7vh) scale(1.15); }
+}
+.modern-grain {
+  position: absolute;
+  inset: 0;
+  opacity: 0.045;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Gradient shimmer text for the modern palette (kept separate from the
+   South Indian .gold-text, which uses hardcoded ornate-gold hex values). */
+.modern-grad-text {
+  background: linear-gradient(100deg, var(--gold) 0%, var(--rose) 25%, var(--violet) 50%, var(--sky) 75%, var(--gold) 100%);
+  background-size: 300% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 6s linear infinite;
+}
+
+/* Spinning conic-gradient "halo" ring, used behind buttons/avatars for a
+   colourful, eye-catching accent. */
+.modern-halo {
+  background: conic-gradient(from 0deg, var(--gold), var(--rose), var(--violet), var(--sky), var(--gold));
+  animation: spin 6s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* Soft glass-panel card used throughout the modern page. */
+.modern-glass {
+  background: color-mix(in srgb, var(--ivory) 65%, white 10%);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid color-mix(in srgb, var(--gold) 20%, white 60%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modern-bg,
+  .modern-bg::before, .modern-bg::after,
+  .modern-bg .modern-bg-orb, .modern-bg .modern-bg-orb2, .modern-bg .modern-bg-orb3,
+  .modern-bg .modern-bg-aurora, .modern-halo { animation: none !important; }
+}
