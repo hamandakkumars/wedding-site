@@ -1,6 +1,7 @@
 "use client";
 import { motion, useMotionTemplate, useMotionValue, useSpring } from "framer-motion";
 import type { PointerEvent } from "react";
+import QRCode from "react-qr-code";
 import { wedding } from "@/data/wedding";
 import Reveal from "../Reveal";
 import ModernSectionTitle from "./ModernSectionTitle";
@@ -66,10 +67,10 @@ export default function ModernReceptions() {
               <div className="relative px-8 pb-6 pt-8">
                 <h3 className="font-serif text-2xl text-ink transition group-hover:text-gold">{r.city} Reception</h3>
                 <p className="mt-3 font-sans text-base font-medium tracking-wide text-ink/80" style={{ fontVariantNumeric: "tabular-nums" }}>{r.date}</p>
-                <p className="text-sm tracking-wide text-ink/60">{r.time}</p>
+                <p className="text-sm tracking-wide text-ink/80">{r.time}</p>
                 <div className="mx-auto my-5 h-px w-10 bg-gold" />
                 <p className="font-serif text-lg text-ink">{r.venue}</p>
-                <p className="mt-1 text-sm text-ink/60">{r.address}</p>
+                <p className="mt-1 text-sm text-ink/80">{r.address}</p>
                 <a
                   href={r.mapUrl}
                   target="_blank"
@@ -78,6 +79,12 @@ export default function ModernReceptions() {
                 >
                   Get Directions →
                 </a>
+                <div className="mx-auto mt-6 flex w-fit flex-col items-center rounded-xl bg-white p-3 shadow-sm">
+                  <a href={r.mapUrl} target="_blank" rel="noreferrer" aria-label={`Scan to open ${r.venue} in Google Maps`}>
+                    <QRCode value={r.mapUrl} size={88} level="M" />
+                  </a>
+                  <p className="mt-2 text-[10px] uppercase tracking-[0.2em] text-ink/50">Scan for directions</p>
+                </div>
               </div>
               <iframe
                 title={`${r.city} venue map`}

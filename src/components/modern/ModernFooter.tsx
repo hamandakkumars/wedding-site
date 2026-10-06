@@ -21,7 +21,7 @@ export default function ModernFooter() {
         <p className="modern-grad-text mt-6 font-serif text-6xl">
           {wedding.bride.name[0]} <span>&amp;</span> {wedding.groom.name[0]}
         </p>
-        <p className="mt-6 text-xs tracking-[0.4em] text-ivory/60">{wedding.hashtag}</p>
+        <p className="mt-6 text-xs tracking-[0.4em] text-ivory/80">{wedding.hashtag}</p>
       </Reveal>
     </footer>
   );

@@ -48,7 +48,7 @@ export default function ModernStory() {
               <Reveal delay={0.1} className="modern-glass w-full max-w-sm rounded-2xl px-6 py-6 text-center shadow-[0_8px_30px_rgba(0,0,0,.04)] transition hover:-translate-y-1 hover:shadow-[0_14px_40px_rgba(0,0,0,.07)]">
                 <p className="text-xs uppercase tracking-[0.3em]" style={{ color: accent }}>{s.year}</p>
                 <h3 className="mt-2 font-serif text-2xl text-ink">{s.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-ink/70">{s.text}</p>
+                <p className="mt-2 text-sm leading-relaxed text-ink/85">{s.text}</p>
               </Reveal>
               {!isLast && (
                 <Connector height="4rem" color={`linear-gradient(to bottom, ${accent}, ${nextAccent})`} />

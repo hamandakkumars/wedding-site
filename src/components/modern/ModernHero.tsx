@@ -52,13 +52,13 @@ export default function ModernHero({ started }: { started: boolean }) {
         transition={{ staggerChildren: 0.25, delayChildren: 0.3 }}
         className="relative z-10"
       >
-        <motion.p variants={item} className="text-[11px] uppercase tracking-[0.5em] text-maroon/60">The Reception Of</motion.p>
-        <h1 className="mt-7 font-serif text-6xl font-medium leading-[1.05] text-ink sm:text-8xl">
-          <motion.span variants={nameWord} className="inline-block">{wedding.bride.name}</motion.span>
-          <motion.span variants={nameWord} className="modern-grad-text mx-4 inline-block">&amp;</motion.span>
-          <motion.span variants={nameWord} className="inline-block">{wedding.groom.name}</motion.span>
+        <motion.p variants={item} className="px-2 text-[11px] uppercase tracking-[0.35em] text-maroon/60">The Reception Of</motion.p>
+        <h1 className="mt-7 flex flex-wrap items-baseline justify-center gap-x-3 font-serif text-6xl font-medium leading-[1.05] text-ink sm:gap-x-5 sm:text-8xl">
+          <motion.span variants={nameWord}>{wedding.bride.name}</motion.span>
+          <motion.span variants={nameWord} className="modern-grad-text">&amp;</motion.span>
+          <motion.span variants={nameWord}>{wedding.groom.name}</motion.span>
         </h1>
-        <motion.p variants={item} className="mt-7 font-serif text-lg italic text-ink/70 sm:text-xl">
+        <motion.p variants={item} className="mt-7 font-serif text-lg italic text-ink/85 sm:text-xl">
           invite you to their wedding reception
         </motion.p>
         <motion.div variants={item} className="mx-auto mt-10 flex max-w-lg flex-col items-center gap-4 sm:flex-row sm:justify-center sm:gap-6">
@@ -74,7 +74,7 @@ export default function ModernHero({ started }: { started: boolean }) {
                 }}
                 className="modern-glass flex min-w-[180px] flex-col items-center gap-1 rounded-2xl px-8 py-4 shadow-[0_8px_30px_rgba(0,0,0,.05)]"
               >
-                <p className="text-xs uppercase tracking-[0.3em] text-maroon/60">{r.city}</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-maroon/85">{r.city}</p>
                 <p
                   className="font-sans text-lg font-medium tracking-wide"
                   style={{ color: accent, fontVariantNumeric: "tabular-nums" }}

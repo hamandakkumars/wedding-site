@@ -30,7 +30,7 @@ function Unit({ value, label, accent }: { value: number; label: string; accent: 
           </motion.span>
         </AnimatePresence>
       </div>
-      <span className="mt-1 text-[9px] uppercase tracking-[0.3em] text-maroon/60 sm:text-xs">{label}</span>
+      <span className="mt-1 text-[9px] uppercase tracking-[0.3em] text-maroon/85 sm:text-xs">{label}</span>
     </div>
   );
 }
@@ -51,7 +51,7 @@ function ReceptionCountdown({ reception, now, accent }: { reception: Reception; 
         style={{ background: `radial-gradient(circle, ${accent}, transparent 70%)` }}
       />
       <div className="modern-glass relative rounded-3xl px-5 py-10 text-center shadow-[0_10px_40px_rgba(0,0,0,.05)] transition hover:-translate-y-1 hover:shadow-[0_18px_50px_rgba(0,0,0,.08)] sm:px-8">
-        <p className="text-xs uppercase tracking-[0.4em] text-maroon/60">{reception.city}</p>
+        <p className="text-xs uppercase tracking-[0.4em] text-maroon/85">{reception.city}</p>
         <p className="mt-1 font-sans text-base font-medium tracking-wide text-ink" style={{ fontVariantNumeric: "tabular-nums" }}>{reception.date}</p>
         <div className="mt-6 flex justify-center gap-1 divide-x divide-ink/10 sm:gap-2">
           <Unit value={d} label="Days" accent={accent} />

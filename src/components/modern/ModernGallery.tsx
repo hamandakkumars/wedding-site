@@ -32,7 +32,7 @@ export default function ModernGallery() {
       <img src={photos[i]} alt={`Photo ${i + 1}`} className={full ? "max-h-[85vh] max-w-full rounded-sm" : "w-full object-cover"} loading="lazy" />
     ) : (
       <div
-        className={`flex items-center justify-center font-serif text-2xl italic text-ink/50 ${full ? "h-[70vh] w-[80vw] max-w-xl rounded-sm" : "h-full w-full"}`}
+        className={`flex items-center justify-center font-serif text-2xl italic text-ink/70 ${full ? "h-[70vh] w-[80vw] max-w-xl rounded-sm" : "h-full w-full"}`}
         style={{ background: `linear-gradient(135deg, ${placeholders[i]}, var(--ivory))` }}
       >
         Photo {i + 1}

@@ -1,3 +1,4 @@
+import QRCode from "react-qr-code";
 import { wedding } from "@/data/wedding";
 import Reveal from "./Reveal";
 import SectionTitle from "./SectionTitle";
@@ -35,6 +36,12 @@ export default function Receptions() {
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                 />
+              </div>
+              <div className="mx-auto mt-6 flex w-fit flex-col items-center rounded-xl bg-white p-3 shadow-sm">
+                <a href={r.mapUrl} target="_blank" rel="noreferrer" aria-label={`Scan to open ${r.venue} in Google Maps`}>
+                  <QRCode value={r.mapUrl} size={88} level="M" />
+                </a>
+                <p className="mt-2 text-[10px] uppercase tracking-[0.2em] text-ink/50">Scan for directions</p>
               </div>
             </div>
           </Reveal>

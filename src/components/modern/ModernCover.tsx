@@ -67,7 +67,7 @@ export default function ModernCover({
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.8 }}
-                className="mb-6 font-serif text-lg italic text-ink/70"
+                className="mb-6 font-serif text-lg italic text-ink/85"
               >
                 Dear {guest},
               </motion.p>
@@ -76,7 +76,7 @@ export default function ModernCover({
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.8 }}
-              className="text-[11px] uppercase tracking-[0.5em] text-maroon/60"
+              className="text-[11px] uppercase tracking-[0.5em] text-maroon/85"
             >
               The Reception Of
             </motion.p>
@@ -106,9 +106,9 @@ export default function ModernCover({
                 onClick={tap}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.96 }}
-                className="modern-glass mt-14 cursor-pointer rounded-xl px-10 py-3.5 text-xs uppercase tracking-[0.5em] text-ink shadow-[0_10px_30px_rgba(0,0,0,.1)] transition-shadow hover:text-gold hover:shadow-[0_16px_40px_rgba(0,0,0,.16)]"
+                className="modern-glass mt-14 cursor-pointer whitespace-nowrap rounded-xl px-8 py-3.5 text-xs uppercase tracking-[0.2em] text-ink shadow-[0_10px_30px_rgba(0,0,0,.1)] transition-shadow hover:text-gold hover:shadow-[0_16px_40px_rgba(0,0,0,.16)]"
               >
-                Enter
+                Join the Celebration
               </motion.button>
             </motion.div>
           </motion.div>
