@@ -19,7 +19,7 @@ function Unit({ value, label }: { value: number; label: string }) {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 30, opacity: 0 }}
             transition={{ duration: 0.35 }}
-            className="gold-text font-serif text-3xl font-bold sm:text-5xl"
+            className="gold-text font-date text-2xl font-bold sm:text-4xl"
           >
             {text}
           </motion.span>
