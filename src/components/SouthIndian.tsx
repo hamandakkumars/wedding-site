@@ -1,18 +1,23 @@
-"use client";
-import { motion } from "framer-motion";
-
-// Hanging marigold strands, swaying gently.
+// Hanging marigold strands, swaying gently. Pure CSS animation (not
+// Framer Motion): there are 13 of these mounted for the whole session
+// (inside Hero, which never unmounts), so keeping them off the JS main
+// thread via compositor-driven @keyframes avoids sustained jank.
 export function Garland({ className = "" }: { className?: string }) {
-  const strands = Array.from({ length: 13 }, (_, i) => ({ len: 3 + ((i * 5) % 5), delay: i * 0.25 }));
+  const strands = Array.from({ length: 13 }, (_, i) => ({ len: 3 + ((i * 5) % 5), delay: i * 0.25, dur: 4 + (i % 3) }));
   return (
     <div className={`pointer-events-none absolute inset-x-0 top-0 flex justify-between px-1 ${className}`} aria-hidden>
       {strands.map((s, i) => (
-        <motion.div
+        <div
           key={i}
           className="flex flex-col items-center"
-          style={{ transformOrigin: "top" }}
-          animate={{ rotate: [-2.5, 2.5, -2.5] }}
-          transition={{ duration: 4 + (i % 3), repeat: Infinity, ease: "easeInOut", delay: s.delay }}
+          style={{
+            transformOrigin: "top",
+            animationName: "garlandSway",
+            animationDuration: `${s.dur}s`,
+            animationTimingFunction: "ease-in-out",
+            animationIterationCount: "infinite",
+            animationDelay: `${s.delay}s`,
+          }}
         >
           <span className="h-4 w-px bg-gold" />
           {Array.from({ length: s.len }, (_, j) => (
@@ -25,7 +30,7 @@ export function Garland({ className = "" }: { className?: string }) {
               }}
             />
           ))}
-        </motion.div>
+        </div>
       ))}
     </div>
   );
@@ -101,15 +106,21 @@ export function Gopuram({ className = "", windowFill = "#000" }: { className?: s
   );
 }
 
-// Oil lamp with a flickering flame.
+// Oil lamp with a flickering flame. Pure CSS animation — see note on
+// Garland above; Diya instances stay mounted for the whole session too.
 export function Diya({ className = "" }: { className?: string }) {
   return (
     <div className={`flex flex-col items-center ${className}`} aria-hidden>
-      <motion.div
+      <div
         className="h-6 w-3 rounded-[50%_50%_50%_50%/65%_65%_35%_35%] bg-gradient-to-t from-orange-500 via-yellow-300 to-white"
-        style={{ boxShadow: "0 0 20px 7px rgba(255,190,60,.65)", transformOrigin: "bottom" }}
-        animate={{ scaleY: [1, 1.25, 0.95, 1.15, 1], scaleX: [1, 0.9, 1.05, 0.95, 1] }}
-        transition={{ duration: 1.4, repeat: Infinity }}
+        style={{
+          boxShadow: "0 0 20px 7px rgba(255,190,60,.65)",
+          transformOrigin: "bottom",
+          animationName: "diyaFlicker",
+          animationDuration: "1.4s",
+          animationTimingFunction: "ease-in-out",
+          animationIterationCount: "infinite",
+        }}
       />
       <svg viewBox="0 0 60 24" className="-mt-1 h-6 w-14 text-gold">
         <path d="M2 6 Q6 22 30 22 Q54 22 58 6 Q30 12 2 6Z" fill="currentColor" />

@@ -9,6 +9,10 @@ const ease = [0.65, 0, 0.35, 1] as const;
 const REVEAL_MS = 1700; // site starts animating underneath
 const GONE_MS = 2700; // cover removed
 
+// CSS-animated (not Framer Motion): 22 of these run at once for the few
+// seconds the cover is up, which is enough concurrent JS-driven animations
+// to visibly stutter lower-powered phones. @keyframes offloads them to the
+// compositor instead.
 function Sparkles() {
   const items = useMemo(
     () => Array.from({ length: 22 }, (_, i) => ({ left: `${(i * 47 + 9) % 100}%`, size: 2 + ((i * 3) % 5), dur: 7 + ((i * 5) % 7), delay: (i * 0.9) % 7 })),
@@ -17,12 +21,18 @@ function Sparkles() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
       {items.map((p, i) => (
-        <motion.span
+        <span
           key={i}
           className="absolute -bottom-4 rounded-full bg-gold-soft"
-          style={{ left: p.left, width: p.size, height: p.size, boxShadow: "0 0 8px 2px rgba(240,215,140,.7)" }}
-          animate={{ y: [0, -900], opacity: [0, 1, 0.8, 0] }}
-          transition={{ duration: p.dur, delay: p.delay, repeat: Infinity, ease: "easeOut" }}
+          style={{
+            left: p.left, width: p.size, height: p.size,
+            boxShadow: "0 0 8px 2px rgba(240,215,140,.7)",
+            animationName: "sparkleRise",
+            animationDuration: `${p.dur}s`,
+            animationDelay: `${p.delay}s`,
+            animationTimingFunction: "ease-out",
+            animationIterationCount: "infinite",
+          }}
         />
       ))}
     </div>
@@ -31,14 +41,13 @@ function Sparkles() {
 
 function Mandala({ className = "", spin = false }: { className?: string; spin?: boolean }) {
   return (
-    <motion.svg
+    <svg
       viewBox="0 0 400 400"
       className={`pointer-events-none absolute text-gold-soft ${className}`}
       fill="none"
       stroke="currentColor"
       strokeWidth=".6"
-      animate={spin ? { rotate: 360 } : undefined}
-      transition={{ duration: 140, repeat: Infinity, ease: "linear" }}
+      style={spin ? { animation: "spin 140s linear infinite" } : undefined}
       aria-hidden
     >
       {[190, 160, 120, 80].map((r) => <circle key={r} cx="200" cy="200" r={r} strokeDasharray={r === 160 ? "2 6" : undefined} />)}
@@ -48,7 +57,7 @@ function Mandala({ className = "", spin = false }: { className?: string; spin?: 
           <circle cx="200" cy="128" r="3" />
         </g>
       ))}
-    </motion.svg>
+    </svg>
   );
 }
 

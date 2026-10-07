@@ -5,6 +5,10 @@ import { wedding } from "@/data/wedding";
 import ScratchReveal from "./ScratchReveal";
 import { Diya, Garland, Gopuram } from "./SouthIndian";
 
+// CSS-animated (not Framer Motion): Hero never unmounts, so its 16 petals
+// would otherwise run on the JS main thread for the entire visit, even long
+// after the user has scrolled past this section. @keyframes keeps them on
+// the compositor instead.
 function Petals() {
   const petals = useMemo(
     () =>
@@ -19,12 +23,17 @@ function Petals() {
   return (
     <div className="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden>
       {petals.map((p, i) => (
-        <motion.span
+        <span
           key={i}
           className="absolute -top-6 rounded-[60%_0_60%_0] bg-gold/40"
-          style={{ left: p.left, width: p.size, height: p.size }}
-          animate={{ y: ["0vh", "105vh"], x: [0, 30, -20, 10], rotate: [0, 240] }}
-          transition={{ duration: p.dur, delay: p.delay, repeat: Infinity, ease: "linear" }}
+          style={{
+            left: p.left, width: p.size, height: p.size,
+            animationName: "petalFall",
+            animationDuration: `${p.dur}s`,
+            animationDelay: `${p.delay}s`,
+            animationTimingFunction: "linear",
+            animationIterationCount: "infinite",
+          }}
         />
       ))}
     </div>
@@ -80,15 +89,14 @@ export default function Hero({ started }: { started: boolean }) {
         </motion.div>
         <motion.p variants={item} className="mt-4 text-sm tracking-widest text-ink/60">{cities}</motion.p>
       </motion.div>
-      <motion.a
+      <a
         href="#blessing"
         aria-label="Scroll down"
         className="absolute bottom-10 z-10 text-gold"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ repeat: Infinity, duration: 1.8 }}
+        style={{ display: "inline-block", animation: "bounceArrow 1.8s ease-in-out infinite" }}
       >
         ▼
-      </motion.a>
+      </a>
     </section>
   );
 }

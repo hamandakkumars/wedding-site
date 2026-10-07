@@ -48,6 +48,38 @@ body {
 
 .font-tamil { font-family: var(--font-tamil), serif; }
 
+/* Ambient decorative loops on the South Indian page (garland sway, diya
+   flicker, rising sparkles, falling petals, scroll-down bounce). These run
+   continuously and are never off-screen-paused, so they're done as CSS
+   @keyframes (compositor-driven) instead of JS-driven Framer Motion —
+   identical motion, far cheaper to keep running indefinitely. */
+@keyframes garlandSway {
+  0%, 100% { transform: rotate(-2.5deg); }
+  50% { transform: rotate(2.5deg); }
+}
+@keyframes diyaFlicker {
+  0%, 100% { transform: scaleY(1) scaleX(1); }
+  25% { transform: scaleY(1.25) scaleX(0.9); }
+  50% { transform: scaleY(0.95) scaleX(1.05); }
+  75% { transform: scaleY(1.15) scaleX(0.95); }
+}
+@keyframes sparkleRise {
+  0% { transform: translateY(0); opacity: 0; }
+  33% { opacity: 1; }
+  67% { opacity: 0.8; }
+  100% { transform: translateY(-900px); opacity: 0; }
+}
+@keyframes petalFall {
+  0% { transform: translate(0px, 0vh) rotate(0deg); }
+  33% { transform: translate(30px, 35vh) rotate(80deg); }
+  67% { transform: translate(-20px, 70vh) rotate(160deg); }
+  100% { transform: translate(10px, 105vh) rotate(240deg); }
+}
+@keyframes bounceArrow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(10px); }
+}
+
 /* South Indian temple-border strip (diamonds + dots) */
 .temple-border {
   height: 14px;
