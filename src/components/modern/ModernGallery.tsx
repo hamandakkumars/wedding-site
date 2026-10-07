@@ -2,6 +2,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useCallback, useEffect, useState } from "react";
 import { wedding } from "@/data/wedding";
+import { withBase } from "@/lib/assetPath";
 import Reveal from "../Reveal";
 import ModernSectionTitle from "./ModernSectionTitle";
 
@@ -29,7 +30,7 @@ export default function ModernGallery() {
   const tile = (i: number, full = false) =>
     photos.length ? (
       // eslint-disable-next-line @next/next/no-img-element
-      <img src={photos[i]} alt={`Photo ${i + 1}`} className={full ? "max-h-[85vh] max-w-full rounded-sm" : "w-full object-cover"} loading="lazy" />
+      <img src={withBase(photos[i])} alt={`Photo ${i + 1}`} className={full ? "max-h-[85vh] max-w-full rounded-sm" : "w-full object-cover"} loading="lazy" />
     ) : (
       <div
         className={`flex items-center justify-center font-serif text-2xl italic text-ink/70 ${full ? "h-[70vh] w-[80vw] max-w-xl rounded-sm" : "h-full w-full"}`}

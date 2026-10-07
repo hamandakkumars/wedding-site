@@ -1,6 +1,8 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { wedding } from "@/data/wedding";
+import { withBase } from "@/lib/assetPath";
+import { useGuestName } from "@/lib/useGuestName";
 import InviteCover from "./InviteCover";
 import Hero from "./Hero";
 import Blessing from "./Blessing";
@@ -11,9 +13,12 @@ import Gallery from "./Gallery";
 import Footer from "./Footer";
 import MusicToggle from "./MusicToggle";
 
-export default function Invitation({ guest }: { guest?: string }) {
+export default function Invitation() {
   const [open, setOpen] = useState(false);
   const [playing, setPlaying] = useState(false);
+  // Personalised greeting: /?to=Ravi%20%26%20Family — read client-side
+  // (there's no server at request time on a static export).
+  const guest = useGuestName();
   const audio = useRef<HTMLAudioElement>(null);
 
   // Lock scroll until the envelope is opened.
@@ -34,7 +39,7 @@ export default function Invitation({ guest }: { guest?: string }) {
 
   return (
     <>
-      <audio ref={audio} src={wedding.music} loop preload="none" />
+      <audio ref={audio} src={withBase(wedding.music)} loop preload="none" />
       <InviteCover onOpen={start} onReveal={() => setOpen(true)} guest={guest} />
       <main>
         <Hero started={open} />

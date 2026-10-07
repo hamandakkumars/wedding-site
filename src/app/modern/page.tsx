@@ -9,9 +9,9 @@ export const metadata: Metadata = {
   openGraph: { title, description: "Join us in celebrating our wedding receptions.", type: "website" },
 };
 
-export default async function ModernPage({ searchParams }: { searchParams: Promise<{ to?: string | string[] }> }) {
-  const { to } = await searchParams;
-  const raw = Array.isArray(to) ? to[0] : to;
-  const guest = raw?.trim().slice(0, 60) || undefined;
-  return <ModernInvitation guest={guest} />;
+// Static export (GitHub Pages has no server): the ?to= guest personalisation
+// is now read client-side inside <ModernInvitation>, so this page itself
+// needs no per-request data and can be fully prerendered.
+export default function ModernPage() {
+  return <ModernInvitation />;
 }
