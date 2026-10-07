@@ -39,17 +39,21 @@ function Sparkles() {
   );
 }
 
+// Positioning/size/centering live on the outer span so the spin keyframe
+// (which only touches `transform: rotate(...)`) can be applied to the inner
+// svg without fighting the outer translate-to-center transform for control
+// of the same CSS property.
 function Mandala({ className = "", spin = false }: { className?: string; spin?: boolean }) {
   return (
-    <svg
-      viewBox="0 0 400 400"
-      className={`pointer-events-none absolute text-gold-soft ${className}`}
-      fill="none"
-      stroke="currentColor"
-      strokeWidth=".6"
-      style={spin ? { animation: "spin 140s linear infinite" } : undefined}
-      aria-hidden
-    >
+    <span className={`pointer-events-none absolute block ${className}`} aria-hidden>
+      <svg
+        viewBox="0 0 400 400"
+        className="block h-full w-full text-gold-soft"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth=".6"
+        style={spin ? { animation: "spin 140s linear infinite" } : undefined}
+      >
       {[190, 160, 120, 80].map((r) => <circle key={r} cx="200" cy="200" r={r} strokeDasharray={r === 160 ? "2 6" : undefined} />)}
       {Array.from({ length: 24 }, (_, i) => (
         <g key={i} transform={`rotate(${i * 15} 200 200)`}>
@@ -57,7 +61,8 @@ function Mandala({ className = "", spin = false }: { className?: string; spin?: 
           <circle cx="200" cy="128" r="3" />
         </g>
       ))}
-    </svg>
+      </svg>
+    </span>
   );
 }
 
@@ -107,14 +112,14 @@ export default function InviteCover({
   if (phase === "gone") return null;
 
   return (
-    <div className={`fixed inset-0 z-50 flex items-center justify-center ${opening ? "pointer-events-none" : ""}`}>
+    <div className={`fixed inset-0 z-50 flex items-center justify-center overflow-hidden ${opening ? "pointer-events-none" : ""}`}>
       {/* backdrop */}
       <motion.div
         className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,#5a0f22_0%,#33091a_55%,#1c040d_100%)]"
         animate={{ opacity: opening ? 0 : 1 }}
         transition={{ duration: 1.1, delay: 1.5 }}
       >
-        <Mandala spin className="left-1/2 top-1/2 h-[min(150vw,1000px)] w-[min(150vw,1000px)] -translate-x-1/2 -translate-y-1/2 opacity-[0.1]" />
+        <Mandala spin className="inset-0 opacity-[0.1]" />
         <Sparkles />
       </motion.div>
 

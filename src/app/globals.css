@@ -20,7 +20,7 @@
   --font-tamil: var(--font-tamil);
 }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: hidden; }
 body {
   background: var(--ivory);
   color: var(--ink);
