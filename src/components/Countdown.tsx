@@ -41,24 +41,12 @@ function ReceptionCountdown({ reception, now }: { reception: Reception; now: num
 
   const title = `${wedding.bride.name} & ${wedding.groom.name} Reception — ${reception.city}`;
 
-  const downloadIcs = () => {
-    const ics = [
-      "BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//Reception//EN", "BEGIN:VEVENT",
-      `UID:${reception.id}-${stamp(reception.start)}@reception`, `DTSTAMP:${stamp(new Date().toISOString())}`,
-      `DTSTART:${stamp(reception.start)}`, `DTEND:${stamp(reception.end)}`,
-      `SUMMARY:${title}`, `LOCATION:${reception.venue}, ${reception.address}`, "END:VEVENT", "END:VCALENDAR",
-    ].join("\r\n");
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(new Blob([ics], { type: "text/calendar" }));
-    a.download = `reception-${reception.id}.ics`;
-    a.click();
-  };
   const gcal = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${stamp(reception.start)}/${stamp(reception.end)}&location=${encodeURIComponent(`${reception.venue}, ${reception.address}`)}`;
 
   return (
     <Reveal className="rounded-2xl border border-gold/30 bg-white/40 px-5 py-8 text-center shadow-sm sm:px-8">
       <p className="text-xs uppercase tracking-[0.4em] text-maroon/70">{reception.city}</p>
-      <p className="mt-1 font-serif text-lg text-maroon">{reception.date}</p>
+      <p className="mt-1 font-date text-base font-bold text-maroon sm:text-lg">{reception.date}</p>
       <div className="mt-5 flex justify-center gap-2 sm:gap-4">
         <Unit value={d} label="Days" />
         <Unit value={h} label="Hours" />
@@ -67,7 +55,6 @@ function ReceptionCountdown({ reception, now }: { reception: Reception; now: num
       </div>
       <div className="mt-7 flex flex-wrap justify-center gap-3">
         <a href={gcal} target="_blank" rel="noreferrer" className="rounded-full bg-maroon px-5 py-2.5 text-xs tracking-widest text-ivory transition hover:bg-maroon/85">ADD TO CALENDAR</a>
-        <button onClick={downloadIcs} className="rounded-full border border-gold px-5 py-2.5 text-xs tracking-widest text-maroon transition hover:bg-gold/15">DOWNLOAD .ICS</button>
       </div>
     </Reveal>
   );
@@ -85,7 +72,7 @@ export default function Countdown() {
   return (
     <section id="countdown" className="bg-maroon/[0.04] px-6 py-24">
       <SectionTitle kicker="Save the dates" title="Counting Down" />
-      <div className="mx-auto grid max-w-3xl gap-8 sm:grid-cols-2">
+      <div className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-2">
         {wedding.receptions.map((r) => (
           <ReceptionCountdown key={r.id} reception={r} now={now} />
         ))}

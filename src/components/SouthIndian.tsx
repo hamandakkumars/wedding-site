@@ -3,7 +3,7 @@
 // (inside Hero, which never unmounts), so keeping them off the JS main
 // thread via compositor-driven @keyframes avoids sustained jank.
 export function Garland({ className = "" }: { className?: string }) {
-  const strands = Array.from({ length: 13 }, (_, i) => ({ len: 3 + ((i * 5) % 5), delay: i * 0.25, dur: 4 + (i % 3) }));
+  const strands = Array.from({ length: 13 }, (_, i) => ({ len: 3 + ((i * 5) % 5), delay: i * 0.25, dur: 2.2 + (i % 3) * 0.6 }));
   return (
     <div className={`pointer-events-none absolute inset-x-0 top-0 flex justify-between px-1 ${className}`} aria-hidden>
       {strands.map((s, i) => (

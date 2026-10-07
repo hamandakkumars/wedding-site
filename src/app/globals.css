@@ -18,6 +18,7 @@
   --font-script: var(--font-script);
   --font-sans: var(--font-inter);
   --font-tamil: var(--font-tamil);
+  --font-date: var(--font-space-grotesk);
 }
 
 html { scroll-behavior: smooth; overflow-x: hidden; }
@@ -54,8 +55,8 @@ body {
    @keyframes (compositor-driven) instead of JS-driven Framer Motion —
    identical motion, far cheaper to keep running indefinitely. */
 @keyframes garlandSway {
-  0%, 100% { transform: rotate(-2.5deg); }
-  50% { transform: rotate(2.5deg); }
+  0%, 100% { transform: rotate(-8deg); }
+  50% { transform: rotate(8deg); }
 }
 @keyframes diyaFlicker {
   0%, 100% { transform: scaleY(1) scaleX(1); }

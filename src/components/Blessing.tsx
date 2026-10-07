@@ -24,13 +24,15 @@ function QualLine(props: { completed?: string; pursuing: string }) {
 // Three distinct styles so name / qualifications / designation never blend
 // together: name is plain serif (identity), qualifications are small gold
 // tracked caps (a "credential" look), designation is italic and muted (a
-// caption). Qualifications also get their own full-width line so a long
-// list wraps cleanly instead of stranding one abbreviation alone.
+// caption). Name and qualifications share a line (wrapping together if
+// long) with the designation on its own line below.
 function ParentBlock({ name, qualifications, designation }: { name: string; qualifications: string; designation: string }) {
   return (
     <div>
-      <p className="font-serif text-lg text-ink">{name}</p>
-      <p className="mt-0.5 text-xs font-semibold uppercase tracking-[0.12em] text-gold">{qualifications}</p>
+      <p className="flex flex-wrap items-baseline gap-x-2">
+        <span className="font-serif text-lg text-ink">{name}</span>
+        <span className="text-xs font-semibold uppercase tracking-[0.12em] text-gold">{qualifications}</span>
+      </p>
       <p className="mt-1 font-serif text-sm italic text-ink/65">{designation}</p>
     </div>
   );
@@ -47,7 +49,7 @@ export default function Blessing() {
       <div className="mt-14 grid gap-10 sm:grid-cols-2">
         <Reveal x={-40} y={0}>
           <p className="text-xs uppercase tracking-[0.3em] text-maroon/70">Bride</p>
-          <p className="gold-text font-script text-4xl">{wedding.bride.title} {wedding.bride.full}</p>
+          <p className="gold-text pt-2 font-script text-4xl leading-[1.3]">{wedding.bride.title} {wedding.bride.full}</p>
           <div className="mt-2">
             <QualLine {...wedding.bride.qualifications} />
           </div>
@@ -55,7 +57,7 @@ export default function Blessing() {
         </Reveal>
         <Reveal x={40} y={0}>
           <p className="text-xs uppercase tracking-[0.3em] text-maroon/70">Groom</p>
-          <p className="gold-text font-script text-4xl">{wedding.groom.title} {wedding.groom.full}</p>
+          <p className="gold-text pt-2 font-script text-4xl leading-[1.3]">{wedding.groom.title} {wedding.groom.full}</p>
           <div className="mt-2">
             <QualLine {...wedding.groom.qualifications} />
           </div>
@@ -79,9 +81,11 @@ export default function Blessing() {
           <ParentBlock {...wedding.groom.mother} />
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-maroon/70">Brother</p>
-            <p className="mt-1 font-serif text-lg text-ink">{wedding.groom.brother.name}</p>
-            <p className="mt-0.5 text-xs font-semibold uppercase tracking-[0.12em] text-gold">
-              <QualText {...wedding.groom.brother.qualifications} />
+            <p className="mt-1 flex flex-wrap items-baseline gap-x-2">
+              <span className="font-serif text-lg text-ink">{wedding.groom.brother.name}</span>
+              <span className="text-xs font-semibold uppercase tracking-[0.12em] text-gold">
+                <QualText {...wedding.groom.brother.qualifications} />
+              </span>
             </p>
           </div>
         </Reveal>

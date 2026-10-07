@@ -40,8 +40,6 @@ function Petals() {
   );
 }
 
-const cities = wedding.receptions.map((r) => r.city).join(" & ");
-
 export default function Hero({ started }: { started: boolean }) {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
@@ -82,12 +80,11 @@ export default function Hero({ started }: { started: boolean }) {
           >
             {wedding.receptions.map((r) => (
               <span key={r.id}>
-                {r.city} <span className="mx-1 text-gold">·</span> <b className="text-xl">{r.date}</b>
+                <span className="text-lg font-semibold">{r.city}</span> <span className="mx-1 text-gold">·</span> <b className="font-date text-xl font-bold">{r.date}</b>
               </span>
             ))}
           </ScratchReveal>
         </motion.div>
-        <motion.p variants={item} className="mt-4 text-sm tracking-widest text-ink/60">{cities}</motion.p>
       </motion.div>
       <a
         href="#blessing"
