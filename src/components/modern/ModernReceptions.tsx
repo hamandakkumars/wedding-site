@@ -59,13 +59,17 @@ function TiltCard({ city, children }: { city: string; children: React.ReactNode 
 export default function ModernReceptions() {
   return (
     <section id="receptions" className="px-6 py-24">
-      <ModernSectionTitle kicker="Join the celebration" title="Reception Celebrations" />
+      <ModernSectionTitle kicker="Join the celebration" title="Our Celebrations" />
       <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2">
-        {wedding.receptions.map((r, i) => (
-          <Reveal key={r.id} delay={i * 0.12}>
+        {wedding.receptions.map((r, i) => {
+          // A lone odd-one-out card in the last row would otherwise sit in
+          // the grid's first column (left-aligned) instead of centered.
+          const isLoneLast = wedding.receptions.length % 2 === 1 && i === wedding.receptions.length - 1;
+          return (
+          <Reveal key={r.id} delay={i * 0.12} className={isLoneLast ? "md:col-span-2 md:mx-auto md:w-full md:max-w-[calc(50%-1rem)]" : undefined}>
             <TiltCard city={r.city}>
               <div className="relative px-8 pb-6 pt-8">
-                <h3 className="font-serif text-2xl text-ink transition group-hover:text-gold">{r.city} Reception</h3>
+                <h3 className="font-serif text-2xl text-ink transition group-hover:text-gold">{r.city} {r.type === "wedding" ? "Wedding" : "Reception"}</h3>
                 <p className="mt-3 font-sans text-base font-medium tracking-wide text-ink/80" style={{ fontVariantNumeric: "tabular-nums" }}>{r.date}</p>
                 <p className="text-sm tracking-wide text-ink/80">{r.time}</p>
                 <div className="mx-auto my-5 h-px w-10 bg-gold" />
@@ -95,7 +99,8 @@ export default function ModernReceptions() {
               />
             </TiltCard>
           </Reveal>
-        ))}
+          );
+        })}
       </div>
     </section>
   );

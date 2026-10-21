@@ -1,6 +1,6 @@
 "use client";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useMemo, useRef } from "react";
+import { Fragment, useMemo, useRef } from "react";
 import { wedding } from "@/data/wedding";
 import ScratchReveal from "./ScratchReveal";
 import { Diya, Garland, Gopuram } from "./SouthIndian";
@@ -65,24 +65,28 @@ export default function Hero({ started }: { started: boolean }) {
         transition={{ staggerChildren: 0.35, delayChildren: 1 }}
         className="relative z-10 pt-16"
       >
-        <motion.p variants={item} className="text-xs uppercase tracking-[0.5em] text-maroon/80">The Reception Of</motion.p>
+        <motion.p variants={item} className="text-xs uppercase tracking-[0.5em] text-maroon/80">The Wedding Of</motion.p>
         <motion.h1 variants={item} className="mt-6 font-script text-6xl leading-tight sm:text-8xl">
           <span className="gold-text">{wedding.bride.name}</span>
           <span className="mx-3 block font-serif text-3xl text-maroon sm:inline sm:text-5xl">&amp;</span>
           <span className="gold-text">{wedding.groom.name}</span>
         </motion.h1>
-        <motion.p variants={item} className="mt-6 font-serif text-xl italic text-ink/80 sm:text-2xl">invite you to their wedding reception</motion.p>
+        <motion.p variants={item} className="mt-6 font-serif text-xl italic text-ink/80 sm:text-2xl">invite you to celebrate their wedding</motion.p>
         <motion.p variants={item} className="font-tamil mt-1 text-sm text-maroon/80">{wedding.tamilTitle}</motion.p>
         <motion.div variants={item} className="mx-auto mt-8 max-w-xs">
           <ScratchReveal
             label="✦  SCRATCH TO REVEAL THE DATES  ✦"
-            className="flex flex-col items-center justify-center gap-2 px-4 py-5 font-serif text-base text-maroon"
+            className="flex flex-col items-center justify-center px-4 py-5 font-serif text-base text-maroon"
           >
-            {wedding.receptions.map((r) => (
-              <span key={r.id}>
-                <span className="text-lg font-semibold">{r.city}</span> <span className="mx-1 text-gold">·</span> <b className="font-date text-xl font-bold">{r.date}</b>
-              </span>
-            ))}
+            <div className="grid grid-cols-[auto_auto_auto] items-baseline gap-x-2 gap-y-2">
+              {wedding.receptions.map((r) => (
+                <Fragment key={r.id}>
+                  <span className="text-right text-lg font-semibold">{r.city}</span>
+                  <span className="text-gold">·</span>
+                  <b className="font-date text-left text-xl font-bold">{r.date}</b>
+                </Fragment>
+              ))}
+            </div>
           </ScratchReveal>
         </motion.div>
       </motion.div>

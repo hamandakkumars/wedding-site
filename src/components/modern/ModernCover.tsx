@@ -78,7 +78,7 @@ export default function ModernCover({
               transition={{ delay: 0.3, duration: 0.8 }}
               className="text-[11px] uppercase tracking-[0.5em] text-maroon/85"
             >
-              The Reception Of
+              The Wedding Of
             </motion.p>
             <h1 className="mt-5 font-serif text-5xl font-medium leading-tight text-ink sm:text-7xl">
               <motion.span variants={word} initial="hidden" animate="visible" transition={{ delay: 0.5 }} className="inline-block">

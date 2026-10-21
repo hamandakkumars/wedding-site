@@ -39,7 +39,8 @@ function ReceptionCountdown({ reception, now }: { reception: Reception; now: num
   const m = Math.floor(diff / 60000) % 60;
   const s = Math.floor(diff / 1000) % 60;
 
-  const title = `${wedding.bride.name} & ${wedding.groom.name} Reception — ${reception.city}`;
+  const label = reception.type === "wedding" ? "Wedding" : "Reception";
+  const title = `${wedding.bride.name} & ${wedding.groom.name} ${label} — ${reception.city}`;
 
   const gcal = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${stamp(reception.start)}/${stamp(reception.end)}&location=${encodeURIComponent(`${reception.venue}, ${reception.address}`)}`;
 
@@ -73,9 +74,16 @@ export default function Countdown() {
     <section id="countdown" className="bg-maroon/[0.04] px-6 py-24">
       <SectionTitle kicker="Save the dates" title="Counting Down" />
       <div className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-2">
-        {wedding.receptions.map((r) => (
-          <ReceptionCountdown key={r.id} reception={r} now={now} />
-        ))}
+        {wedding.receptions.map((r, i) => {
+          // A lone odd-one-out card in the last row would otherwise sit in
+          // the grid's first column (left-aligned) instead of centered.
+          const isLoneLast = wedding.receptions.length % 2 === 1 && i === wedding.receptions.length - 1;
+          return (
+            <div key={r.id} className={isLoneLast ? "lg:col-span-2 lg:mx-auto lg:w-full lg:max-w-[calc(50%-1rem)]" : undefined}>
+              <ReceptionCountdown reception={r} now={now} />
+            </div>
+          );
+        })}
       </div>
     </section>
   );

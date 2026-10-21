@@ -82,7 +82,7 @@ function CardFace({ guest }: { guest?: string }) {
 
       <div className="relative z-10 flex h-full flex-col items-center px-8 pt-[19%] text-center">
         <Ornament className="!h-6" />
-        <p className="mt-4 text-[10px] uppercase tracking-[0.5em] text-gold-soft/80">The Reception Of</p>
+        <p className="mt-4 text-[10px] uppercase tracking-[0.5em] text-gold-soft/80">The Wedding Of</p>
         <h1 className="mt-3 font-script text-5xl leading-[1.05] text-[#f6dc8a] drop-shadow-[0_2px_6px_rgba(0,0,0,.35)] sm:text-6xl">
           {wedding.bride.name}
           <span className="block font-serif text-2xl text-gold-soft">&amp;</span>

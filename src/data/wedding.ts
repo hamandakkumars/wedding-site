@@ -36,11 +36,27 @@ export const wedding = {
   tamilTitle: "வரவேற்பு அழைப்பிதழ்",
   blessing:
     "Two hearts, one journey. With the blessings of our elders, we begin this beautiful new chapter together — and we'd love for you to celebrate with us.",
-  // Two reception events, each with its own date, venue and map, listed in
-  // the order a guest would attend them (chronological).
+  // The wedding ceremony plus two reception events, each with its own date,
+  // venue and map, listed in the order a guest would attend them
+  // (chronological). `type` drives "Wedding" vs "Reception" copy and icon.
   receptions: [
     {
+      id: "yercaud",
+      type: "wedding" as const,
+      city: "Yercaud",
+      icon: "ring",
+      date: "15 Nov 2026",
+      time: "9:00 AM onwards",
+      start: "2026-11-15T09:00:00+05:30",
+      end: "2026-11-15T10:30:00+05:30",
+      venue: "Bison Rise Resorts",
+      address: "Near Chakra Mahameru Temple, Nagalur Village, Yercaud, Salem",
+      mapUrl: "https://www.google.com/maps?q=11.8434198,78.2145438",
+      mapEmbed: "https://www.google.com/maps?q=11.8434198,78.2145438&output=embed",
+    },
+    {
       id: "tiruvannamalai",
+      type: "reception" as const,
       city: "Tiruvannamalai",
       icon: "glass",
       date: "20 Nov 2026",
@@ -56,6 +72,7 @@ export const wedding = {
     },
     {
       id: "hosur",
+      type: "reception" as const,
       city: "Hosur",
       icon: "glass",
       date: "22 Nov 2026",

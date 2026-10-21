@@ -5,7 +5,8 @@ import type { Reception, Wedding } from "@/data/wedding";
 export const stamp = (iso: string) => new Date(iso).toISOString().replace(/[-:]|\.\d{3}/g, "");
 
 export function receptionTitle(wedding: Wedding, reception: Reception) {
-  return `${wedding.bride.name} & ${wedding.groom.name} Reception — ${reception.city}`;
+  const label = reception.type === "wedding" ? "Wedding" : "Reception";
+  return `${wedding.bride.name} & ${wedding.groom.name} ${label} — ${reception.city}`;
 }
 
 export function buildIcs(wedding: Wedding, reception: Reception) {
@@ -27,6 +28,6 @@ export function downloadIcs(wedding: Wedding, reception: Reception) {
   const ics = buildIcs(wedding, reception);
   const a = document.createElement("a");
   a.href = URL.createObjectURL(new Blob([ics], { type: "text/calendar" }));
-  a.download = `reception-${reception.id}.ics`;
+  a.download = `${reception.type === "wedding" ? "wedding" : "reception"}-${reception.id}.ics`;
   a.click();
 }

@@ -17,7 +17,7 @@ export default function ModernFooter() {
         style={{ background: "conic-gradient(from 0deg, var(--gold), var(--rose), var(--violet), var(--sky), var(--gold))", filter: "blur(70px)" }}
       />
       <Reveal className="relative z-10">
-        <p className="font-serif text-xl italic text-ivory/85">With love &amp; gratitude, see you at our receptions</p>
+        <p className="font-serif text-xl italic text-ivory/85">With love &amp; gratitude, see you at our celebrations</p>
         <p className="modern-grad-text mt-6 font-serif text-6xl">
           {wedding.bride.name[0]} <span>&amp;</span> {wedding.groom.name[0]}
         </p>

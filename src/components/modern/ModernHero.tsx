@@ -52,16 +52,16 @@ export default function ModernHero({ started }: { started: boolean }) {
         transition={{ staggerChildren: 0.25, delayChildren: 0.3 }}
         className="relative z-10"
       >
-        <motion.p variants={item} className="px-2 text-[11px] uppercase tracking-[0.35em] text-maroon/60">The Reception Of</motion.p>
+        <motion.p variants={item} className="px-2 text-[11px] uppercase tracking-[0.35em] text-maroon/60">The Wedding Of</motion.p>
         <h1 className="mt-7 flex flex-wrap items-baseline justify-center gap-x-3 font-serif text-6xl font-medium leading-[1.05] text-ink sm:gap-x-5 sm:text-8xl">
           <motion.span variants={nameWord}>{wedding.bride.name}</motion.span>
           <motion.span variants={nameWord} className="modern-grad-text">&amp;</motion.span>
           <motion.span variants={nameWord}>{wedding.groom.name}</motion.span>
         </h1>
         <motion.p variants={item} className="mt-7 font-serif text-lg italic text-ink/85 sm:text-xl">
-          invite you to their wedding reception
+          invite you to celebrate their wedding
         </motion.p>
-        <motion.div variants={item} className="mx-auto mt-10 flex max-w-lg flex-col items-center gap-4 sm:flex-row sm:justify-center sm:gap-6">
+        <motion.div variants={item} className="mx-auto mt-10 flex max-w-2xl flex-col flex-wrap items-center justify-center gap-4 sm:flex-row sm:gap-6">
           {wedding.receptions.map((r, i) => {
             const accent = CHIP_COLORS[i % CHIP_COLORS.length];
             return (

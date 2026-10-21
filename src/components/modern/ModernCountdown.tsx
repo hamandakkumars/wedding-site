@@ -96,9 +96,16 @@ export default function ModernCountdown() {
     <section id="countdown" className="px-6 py-24">
       <ModernSectionTitle kicker="Save the dates" title="Counting Down" />
       <div className="mx-auto grid max-w-3xl gap-10 sm:grid-cols-2">
-        {wedding.receptions.map((r, i) => (
-          <ReceptionCountdown key={r.id} reception={r} now={now} accent={ACCENTS[i % ACCENTS.length]} />
-        ))}
+        {wedding.receptions.map((r, i) => {
+          // A lone odd-one-out card in the last row would otherwise sit in
+          // the grid's first column (left-aligned) instead of centered.
+          const isLoneLast = wedding.receptions.length % 2 === 1 && i === wedding.receptions.length - 1;
+          return (
+            <div key={r.id} className={isLoneLast ? "sm:col-span-2 sm:mx-auto sm:w-full sm:max-w-[calc(50%-1.25rem)]" : undefined}>
+              <ReceptionCountdown reception={r} now={now} accent={ACCENTS[i % ACCENTS.length]} />
+            </div>
+          );
+        })}
       </div>
     </section>
   );

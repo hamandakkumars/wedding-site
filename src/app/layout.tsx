@@ -10,11 +10,11 @@ const tamil = Noto_Serif_Tamil({ variable: "--font-tamil", subsets: ["tamil", "l
 const spaceGrotesk = Space_Grotesk({ variable: "--font-space-grotesk", subsets: ["latin"], weight: ["500", "600", "700"] });
 
 const cities = wedding.receptions.map((r) => r.city).join(" & ");
-const title = `${wedding.bride.name} & ${wedding.groom.name} — Reception Invitation`;
+const title = `${wedding.bride.name} & ${wedding.groom.name} — Wedding Invitation`;
 export const metadata: Metadata = {
   title,
-  description: `You are invited to the wedding reception of ${wedding.bride.name} & ${wedding.groom.name} in ${cities}. ${wedding.hashtag}`,
-  openGraph: { title, description: "Join us in celebrating our wedding receptions.", type: "website" },
+  description: `You are invited to the wedding celebrations of ${wedding.bride.name} & ${wedding.groom.name} in ${cities}. ${wedding.hashtag}`,
+  openGraph: { title, description: "Join us in celebrating our wedding.", type: "website" },
 };
 export const viewport: Viewport = { themeColor: "#fbf7f0" };
 
