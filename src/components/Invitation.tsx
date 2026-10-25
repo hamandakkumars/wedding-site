@@ -21,6 +21,12 @@ export default function Invitation() {
   const guest = useGuestName();
   const audio = useRef<HTMLAudioElement>(null);
 
+  // Always start at the top on reload instead of the browser-restored section.
+  useEffect(() => {
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
+  }, []);
+
   // Lock scroll until the envelope is opened.
   useEffect(() => {
     document.body.style.overflow = open ? "" : "hidden";

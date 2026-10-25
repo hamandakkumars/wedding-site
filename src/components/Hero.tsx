@@ -1,8 +1,8 @@
 "use client";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Fragment, useMemo, useRef } from "react";
+import { useMemo, useRef } from "react";
 import { wedding } from "@/data/wedding";
-import ScratchReveal from "./ScratchReveal";
+import TapReveal from "./TapReveal";
 import { Diya, Garland, Gopuram } from "./SouthIndian";
 
 // CSS-animated (not Framer Motion): Hero never unmounts, so its 16 petals
@@ -73,21 +73,24 @@ export default function Hero({ started }: { started: boolean }) {
         </motion.h1>
         <motion.p variants={item} className="mt-6 font-serif text-xl italic text-ink/80 sm:text-2xl">invite you to celebrate their wedding</motion.p>
         <motion.p variants={item} className="font-tamil mt-1 text-sm text-maroon/80">{wedding.tamilTitle}</motion.p>
-        <motion.div variants={item} className="mx-auto mt-8 max-w-xs">
-          <ScratchReveal
-            label="✦  SCRATCH TO REVEAL THE DATES  ✦"
+        <motion.div variants={item} className="mx-auto mt-8 max-w-md sm:max-w-xl">
+          <TapReveal
+            label="✦  Tap for the dates  ✦"
             className="flex flex-col items-center justify-center px-4 py-5 font-serif text-base text-maroon"
           >
-            <div className="grid grid-cols-[auto_auto_auto] items-baseline gap-x-2 gap-y-2">
-              {wedding.receptions.map((r) => (
-                <Fragment key={r.id}>
-                  <span className="text-right text-lg font-semibold">{r.city}</span>
-                  <span className="text-gold">·</span>
-                  <b className="font-date text-left text-xl font-bold">{r.date}</b>
-                </Fragment>
-              ))}
+            <div className="flex items-start justify-center gap-4 sm:gap-8">
+              {wedding.receptions.map((r) => {
+                const [day, mon, year] = r.date.split(" ");
+                return (
+                  <div key={r.id} className="flex flex-col items-center">
+                    <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-maroon/80 sm:text-xs sm:tracking-[0.25em]">{r.city}</span>
+                    <b className="font-date mt-1 text-xl font-bold leading-tight">{day} {mon}</b>
+                    <span className="font-date text-sm text-maroon/80">{year}</span>
+                  </div>
+                );
+              })}
             </div>
-          </ScratchReveal>
+          </TapReveal>
         </motion.div>
       </motion.div>
       <a

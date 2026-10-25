@@ -88,7 +88,6 @@ export const wedding = {
   ],
   // Kept as-is at the user's request (placeholder narrative, not real info).
   story: [
-    { year: "", title: "We Met", text: "" },
     { year: "8 Feb 2026", title: "Engagement", text: "Surrounded by family and friends, we exchanged rings and began our journey together." },
     { year: "2026", title: "Tying the Knot", text: "With our families beside us, we begin our beautiful life together." },
   ],
