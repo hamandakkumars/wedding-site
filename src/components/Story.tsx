@@ -19,7 +19,7 @@ export default function Story() {
                 className={`sm:w-1/2 ${left ? "sm:pr-12 sm:text-right" : "sm:ml-auto sm:pl-12"}`}
               >
                 <div className="rounded-xl border border-gold/30 bg-white/70 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
-                  {s.year && <span className="gold-text font-date text-xl font-bold">{s.year}</span>}
+                  {s.year && <span className="title-text font-date text-xl font-bold">{s.year}</span>}
                   <h3 className="mt-1 font-serif text-2xl text-maroon">{s.title}</h3>
                   {s.text && <p className="mt-2 text-sm leading-relaxed text-ink/75">{s.text}</p>}
                 </div>

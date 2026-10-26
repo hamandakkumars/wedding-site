@@ -18,7 +18,7 @@ export default function Receptions() {
           <Reveal key={r.id} delay={i * 0.15} className={isLoneLast ? "md:col-span-2 md:mx-auto md:w-full md:max-w-[calc(50%-1rem)]" : undefined}>
             <div className="group h-full overflow-hidden rounded-t-[7rem] rounded-b-2xl border border-gold/40 bg-ivory px-8 pb-8 pt-14 text-center shadow-sm transition duration-300 hover:-translate-y-2 hover:shadow-xl">
               <div className="text-4xl transition group-hover:scale-110">{icons[r.icon] ?? "✨"}</div>
-              <h3 className="gold-text mt-4 font-serif text-3xl font-semibold">{r.city} {r.type === "wedding" ? "Wedding" : "Reception"}</h3>
+              <h3 className="title-text mt-4 font-serif text-3xl font-semibold">{r.city} {r.type === "wedding" ? "Wedding" : "Reception"}</h3>
               <p className="mt-4 font-date text-base font-bold text-maroon sm:text-lg">{r.date}</p>
               <p className="text-sm tracking-wide text-ink/70">{r.time}</p>
               <div className="mx-auto my-5 h-px w-12 bg-gold" />

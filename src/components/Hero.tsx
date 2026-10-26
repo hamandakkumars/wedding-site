@@ -67,9 +67,9 @@ export default function Hero({ started }: { started: boolean }) {
       >
         <motion.p variants={item} className="text-xs uppercase tracking-[0.5em] text-maroon/80">The Wedding Of</motion.p>
         <motion.h1 variants={item} className="mt-6 font-script text-6xl leading-tight sm:text-8xl">
-          <span className="gold-text">{wedding.bride.name}</span>
-          <span className="mx-3 block font-serif text-3xl text-maroon sm:inline sm:text-5xl">&amp;</span>
-          <span className="gold-text">{wedding.groom.name}</span>
+          <span className="name-text">{wedding.bride.name}</span>
+          <span className="mx-3 block font-serif text-3xl text-gold sm:inline sm:text-5xl">&amp;</span>
+          <span className="name-text">{wedding.groom.name}</span>
         </motion.h1>
         <motion.p variants={item} className="mt-6 font-serif text-xl italic text-ink/80 sm:text-2xl">invite you to celebrate their wedding</motion.p>
         <motion.p variants={item} className="font-tamil mt-1 text-sm text-maroon/80">{wedding.tamilTitle}</motion.p>
@@ -83,7 +83,7 @@ export default function Hero({ started }: { started: boolean }) {
                 const [day, mon, year] = r.date.split(" ");
                 return (
                   <div key={r.id} className="flex flex-col items-center">
-                    <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-maroon/80 sm:text-xs sm:tracking-[0.25em]">{r.city}</span>
+                    <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-[#9a4a12] sm:text-xs sm:tracking-[0.25em]">{r.city}</span>
                     <b className="font-date mt-1 text-xl font-bold leading-tight">{day} {mon}</b>
                     <span className="font-date text-sm text-maroon/80">{year}</span>
                   </div>

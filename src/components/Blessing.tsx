@@ -15,7 +15,7 @@ function QualText({ completed, pursuing }: { completed?: string; pursuing: strin
 
 function QualLine(props: { completed?: string; pursuing: string }) {
   return (
-    <p className="text-xs font-semibold uppercase tracking-[0.12em] text-gold">
+    <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#8a3a1c]">
       <QualText {...props} />
     </p>
   );
@@ -31,7 +31,7 @@ function ParentBlock({ name, qualifications, designation }: { name: string; qual
     <div>
       <p className="flex flex-wrap items-baseline gap-x-2">
         <span className="font-serif text-lg text-ink">{name}</span>
-        <span className="text-xs font-semibold uppercase tracking-[0.12em] text-gold">{qualifications}</span>
+        <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#8a3a1c]">{qualifications}</span>
       </p>
       <p className="mt-1 font-serif text-sm italic text-ink/65">{designation}</p>
     </div>
@@ -49,7 +49,7 @@ export default function Blessing() {
       <div className="mt-14 grid gap-10 sm:grid-cols-2">
         <Reveal x={-40} y={0}>
           <p className="text-xs uppercase tracking-[0.3em] text-maroon/70">Bride</p>
-          <p className="gold-text pt-2 font-script text-4xl leading-[1.3]">{wedding.bride.title} {wedding.bride.full}</p>
+          <p className="name-text pt-2 font-script text-4xl leading-[1.3]">{wedding.bride.title} {wedding.bride.full}</p>
           <div className="mt-2">
             <QualLine {...wedding.bride.qualifications} />
           </div>
@@ -57,7 +57,7 @@ export default function Blessing() {
         </Reveal>
         <Reveal x={40} y={0}>
           <p className="text-xs uppercase tracking-[0.3em] text-maroon/70">Groom</p>
-          <p className="gold-text pt-2 font-script text-4xl leading-[1.3]">{wedding.groom.title} {wedding.groom.full}</p>
+          <p className="name-text pt-2 font-script text-4xl leading-[1.3]">{wedding.groom.title} {wedding.groom.full}</p>
           <div className="mt-2">
             <QualLine {...wedding.groom.qualifications} />
           </div>
@@ -83,7 +83,7 @@ export default function Blessing() {
             <p className="text-xs uppercase tracking-[0.3em] text-maroon/70">Brother</p>
             <p className="mt-1 flex flex-wrap items-baseline gap-x-2">
               <span className="font-serif text-lg text-ink">{wedding.groom.brother.name}</span>
-              <span className="text-xs font-semibold uppercase tracking-[0.12em] text-gold">
+              <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#8a3a1c]">
                 <QualText {...wedding.groom.brother.qualifications} />
               </span>
             </p>
