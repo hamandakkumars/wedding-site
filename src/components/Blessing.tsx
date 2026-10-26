@@ -30,10 +30,10 @@ function ParentBlock({ name, qualifications, designation }: { name: string; qual
   return (
     <div>
       <p className="flex flex-wrap items-baseline gap-x-2">
-        <span className="font-serif text-lg text-ink">{name}</span>
+        <span className="font-serif text-xl font-bold text-maroon">{name}</span>
         <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#8a3a1c]">{qualifications}</span>
       </p>
-      <p className="mt-1 font-serif text-sm italic text-ink/65">{designation}</p>
+      <p className="mt-1 font-sans text-[13px] font-medium tracking-wide text-[#c0392b]">{designation}</p>
     </div>
   );
 }
@@ -82,7 +82,7 @@ export default function Blessing() {
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-maroon/70">Brother</p>
             <p className="mt-1 flex flex-wrap items-baseline gap-x-2">
-              <span className="font-serif text-lg text-ink">{wedding.groom.brother.name}</span>
+              <span className="font-serif text-xl font-bold text-maroon">{wedding.groom.brother.name}</span>
               <span className="text-xs font-semibold uppercase tracking-[0.12em] text-[#8a3a1c]">
                 <QualText {...wedding.groom.brother.qualifications} />
               </span>
