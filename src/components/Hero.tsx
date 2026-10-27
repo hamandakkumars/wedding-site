@@ -2,6 +2,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useMemo, useRef } from "react";
 import { wedding } from "@/data/wedding";
+import { withBase } from "@/lib/assetPath";
 import TapReveal from "./TapReveal";
 import { Diya, Garland, Gopuram } from "./SouthIndian";
 
@@ -40,6 +41,56 @@ function Petals() {
   );
 }
 
+// Soft background slideshow: the couple's photos cross-fade slowly behind the
+// page with a gentle zoom (a header band on phones that fades into the page; on wide screens they take turns
+// fading in from the left and right edges so the names stay clear). Pure CSS (see heroSlide in globals.css) so it runs on
+// the compositor, and the ivory wash keeps the names readable on top.
+const SLIDES = [
+  { src: "/images/hero-window.jpg", pos: "50% 22%" },
+  { src: "/images/hero-teal-arch.jpg", pos: "50% 25%" },
+  { src: "/images/hero-closeup.jpg", pos: "50% 35%" },
+  { src: "/images/hero-walk.jpg", pos: "50% 30%" },
+  { src: "/images/hero-temple.jpg", pos: "50% 30%" },
+  { src: "/images/hero-stage.jpg", pos: "50% 35%" },
+  { src: "/images/hero-pillar.jpg", pos: "50% 40%" },
+  { src: "/images/hero-beach.jpg", pos: "50% 45%" },
+];
+const SLIDE_SECONDS = 6;
+
+function Slideshow({ started }: { started: boolean }) {
+  return (
+    <motion.div
+      aria-hidden
+      className="pointer-events-none absolute inset-x-0 top-0 h-[38vh] overflow-hidden [mask-image:linear-gradient(to_bottom,#000_72%,transparent)] lg:inset-0 lg:h-auto lg:[mask-image:none]"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: started ? 1 : 0 }}
+      transition={{ duration: 2.5, delay: started ? 0.6 : 0 }}
+    >
+      {SLIDES.map((s, i) => (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          key={s.src}
+          src={withBase(s.src)}
+          alt=""
+          draggable={false}
+          loading={i === 0 ? "eager" : "lazy"}
+          className={`absolute inset-0 h-full w-full object-cover opacity-0 lg:w-[29%] ${
+            i % 2 === 0
+              ? "lg:left-0 lg:[mask-image:linear-gradient(to_right,#000_68%,transparent)]"
+              : "lg:left-auto lg:right-0 lg:[mask-image:linear-gradient(to_left,#000_68%,transparent)]"
+          }`}
+          style={{
+            objectPosition: s.pos,
+            animation: `heroSlide ${SLIDES.length * SLIDE_SECONDS}s linear infinite`,
+            animationDelay: `${i * SLIDE_SECONDS}s`,
+          }}
+        />
+      ))}
+      <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,247,230,.62),rgba(255,247,230,.42)_45%,rgba(255,247,230,.75))] max-lg:hidden lg:opacity-10" />
+    </motion.div>
+  );
+}
+
 export default function Hero({ started }: { started: boolean }) {
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
@@ -48,8 +99,9 @@ export default function Hero({ started }: { started: boolean }) {
   const item = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 1 } } };
 
   return (
-    <section ref={ref} id="home" className="paper relative flex min-h-screen items-center justify-center overflow-hidden px-6 text-center">
+    <section ref={ref} id="home" className="paper relative flex min-h-screen items-center justify-center overflow-hidden px-6 text-center max-lg:pt-[28vh]">
       <motion.div style={{ y }} className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(232,210,138,.35),transparent_65%)]" />
+      <Slideshow started={started} />
       <div className="absolute inset-4 rounded-sm border border-gold/50 sm:inset-8" />
       <div className="absolute inset-6 rounded-sm border border-gold/25 sm:inset-11" />
       <Gopuram windowFill="#fff7e6" className="pointer-events-none absolute bottom-10 left-1/2 w-[min(56vw,340px)] -translate-x-1/2 text-maroon/[0.08]" />

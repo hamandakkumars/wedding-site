@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Great_Vibes, Inter, Noto_Serif_Tamil, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { wedding } from "@/data/wedding";
+import ImageGuard from "@/components/ImageGuard";
 
 const cormorant = Cormorant_Garamond({ variable: "--font-cormorant", subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 const script = Great_Vibes({ variable: "--font-script", subsets: ["latin"], weight: "400" });
@@ -21,7 +22,10 @@ export const viewport: Viewport = { themeColor: "#fbf7f0" };
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${cormorant.variable} ${script.variable} ${inter.variable} ${tamil.variable} ${spaceGrotesk.variable}`}>
-      <body>{children}</body>
+      <body>
+        <ImageGuard />
+        {children}
+      </body>
     </html>
   );
 }

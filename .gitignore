@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# original full-resolution photos: never publish these (the site uses resized copies in public/images)
+/assets/

@@ -88,11 +88,20 @@ export const wedding = {
   ],
   // Kept as-is at the user's request (placeholder narrative, not real info).
   story: [
-    { year: "8 Feb 2026", title: "Engagement", text: "Surrounded by family and friends, we exchanged rings and began our journey together." },
-    { year: "2026", title: "Tying the Knot", text: "With our families beside us, we begin our beautiful life together." },
+    { year: "8 Feb 2026", title: "Engagement", text: "Surrounded by family and friends, we exchanged rings and began our journey together.", photo: "/images/couple-engagement.jpg" },
+    { year: "2026", title: "Tying the Knot", text: "With our families beside us, we begin our beautiful life together.", photo: "/images/couple-temple.jpg" },
   ],
-  // Put photos in /public/images and list them here. Placeholders use gradients.
-  gallery: [] as string[],
+  // Photos live in /public/images (resized from /assets). Placeholders use gradients when empty.
+  gallery: [
+    "/images/couple-engagement.jpg",
+    "/images/couple-teal-1.jpg",
+    "/images/couple-temple.jpg",
+    "/images/couple-beach-walk.jpg",
+    "/images/couple-teal-2.jpg",
+    "/images/couple-sunlight.jpg",
+    "/images/couple-beach-rock.jpg",
+    "/images/couple-beach-run.jpg",
+  ] as string[],
   music: "/music/wedding.mp3", // drop an mp3 here
 };
 export type Wedding = typeof wedding;

@@ -1,4 +1,5 @@
 import { wedding } from "@/data/wedding";
+import { withBase } from "@/lib/assetPath";
 import Reveal from "./Reveal";
 import SectionTitle from "./SectionTitle";
 
@@ -18,10 +19,21 @@ export default function Story() {
                 y={0}
                 className={`sm:w-1/2 ${left ? "sm:pr-12 sm:text-right" : "sm:ml-auto sm:pl-12"}`}
               >
-                <div className="rounded-xl border border-gold/30 bg-white/70 p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+                <div className="overflow-hidden rounded-xl border border-gold/30 bg-white/70 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+                  {s.photo && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={withBase(s.photo)}
+                      alt={`${wedding.bride.name} and ${wedding.groom.name} — ${s.title}`}
+                      className="aspect-[4/3] w-full object-cover object-top"
+                      loading="lazy"
+                    />
+                  )}
+                  <div className="p-6">
                   {s.year && <span className="title-text font-date text-xl font-bold">{s.year}</span>}
                   <h3 className="mt-1 font-serif text-2xl text-maroon">{s.title}</h3>
                   {s.text && <p className="mt-2 text-sm leading-relaxed text-ink/75">{s.text}</p>}
+                  </div>
                 </div>
               </Reveal>
             </div>
