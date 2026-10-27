@@ -1,6 +1,6 @@
 "use client";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { wedding } from "@/data/wedding";
 import { withBase } from "@/lib/assetPath";
 import TapReveal from "./TapReveal";
@@ -48,7 +48,7 @@ function Petals() {
 const SLIDES = [
   { src: "/images/hero-window.jpg", pos: "50% 22%" },
   { src: "/images/hero-teal-arch.jpg", pos: "50% 25%" },
-  { src: "/images/hero-closeup.jpg", pos: "50% 35%" },
+  { src: "/images/hero-closeup.jpg", pos: "50% 4%" },
   { src: "/images/hero-walk.jpg", pos: "50% 30%" },
   { src: "/images/hero-temple.jpg", pos: "50% 30%" },
   { src: "/images/hero-stage.jpg", pos: "50% 35%" },
@@ -58,34 +58,67 @@ const SLIDES = [
 const SLIDE_SECONDS = 6;
 
 function Slideshow({ started }: { started: boolean }) {
+  // Start the cross-fade clock only once the cover has opened (plus a beat for
+  // its reveal to finish), so the first photo gets its full turn on screen
+  // instead of having already faded out by the time the guest sees the page.
+  const [run, setRun] = useState(false);
+  useEffect(() => {
+    if (!started) return;
+    const t = setTimeout(() => setRun(true), 900);
+    return () => clearTimeout(t);
+  }, [started]);
+
   return (
     <motion.div
       aria-hidden
-      className="pointer-events-none absolute inset-x-0 top-0 h-[38vh] overflow-hidden [mask-image:linear-gradient(to_bottom,#000_72%,transparent)] lg:inset-0 lg:h-auto lg:[mask-image:none]"
+      className="pointer-events-none absolute inset-x-0 top-0 h-[calc(32vh+3.5rem)] overflow-hidden lg:inset-0 lg:top-0 lg:h-auto"
       initial={{ opacity: 0 }}
       animate={{ opacity: started ? 1 : 0 }}
       transition={{ duration: 2.5, delay: started ? 0.6 : 0 }}
     >
-      {SLIDES.map((s, i) => (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          key={s.src}
-          src={withBase(s.src)}
-          alt=""
-          draggable={false}
-          loading={i === 0 ? "eager" : "lazy"}
-          className={`absolute inset-0 h-full w-full object-cover opacity-0 lg:w-[29%] ${
-            i % 2 === 0
-              ? "lg:left-0 lg:[mask-image:linear-gradient(to_right,#000_68%,transparent)]"
-              : "lg:left-auto lg:right-0 lg:[mask-image:linear-gradient(to_left,#000_68%,transparent)]"
-          }`}
-          style={{
-            objectPosition: s.pos,
-            animation: `heroSlide ${SLIDES.length * SLIDE_SECONDS}s linear infinite`,
-            animationDelay: `${i * SLIDE_SECONDS}s`,
-          }}
-        />
-      ))}
+      {SLIDES.map((s, i) => {
+        const src = withBase(s.src);
+        return (
+          <div
+            key={s.src}
+            className={`absolute inset-0 opacity-0 lg:w-[29%] ${
+              i % 2 === 0
+                ? "lg:left-0 lg:[mask-image:linear-gradient(to_right,#000_68%,transparent)]"
+                : "lg:left-auto lg:right-0 lg:[mask-image:linear-gradient(to_left,#000_68%,transparent)]"
+            }`}
+            style={run ? {
+              animation: `heroSlide ${SLIDES.length * SLIDE_SECONDS}s linear infinite`,
+              animationDelay: `${i * SLIDE_SECONDS}s`,
+              willChange: "opacity, transform",
+            } : undefined}
+          >
+            {/* Phones: the photo sits just below the garland's top edge so the
+                faces clear it; a mirrored strip of the same photo fills the
+                space above, so the picture still reaches the top of the page. */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={src}
+              alt=""
+              draggable={false}
+              loading={i === 0 ? "eager" : "lazy"}
+              className="absolute inset-0 h-full w-full object-cover max-lg:top-7 max-lg:h-[calc(100%-1.75rem)]"
+              style={{ objectPosition: s.pos }}
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={src}
+              alt=""
+              draggable={false}
+              loading={i === 0 ? "eager" : "lazy"}
+              className="absolute inset-x-0 top-0 h-7 w-full scale-y-[-1] object-cover object-top lg:hidden"
+            />
+          </div>
+        );
+      })}
+      {/* Phones: fade the band into the page with a cheap overlay (a CSS mask on
+          a container of animating images re-rasterised every frame and stuttered). */}
+      <div className="absolute inset-x-0 top-0 h-[18%] bg-gradient-to-b from-ivory/30 to-transparent lg:hidden" />
+      <div className="absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-ivory to-transparent lg:hidden" />
       <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,247,230,.62),rgba(255,247,230,.42)_45%,rgba(255,247,230,.75))] max-lg:hidden lg:opacity-10" />
     </motion.div>
   );
@@ -99,7 +132,7 @@ export default function Hero({ started }: { started: boolean }) {
   const item = { hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0, transition: { duration: 1 } } };
 
   return (
-    <section ref={ref} id="home" className="paper relative flex min-h-screen items-center justify-center overflow-hidden px-6 text-center max-lg:pt-[28vh]">
+    <section ref={ref} id="home" className="paper relative flex min-h-screen items-center justify-center overflow-hidden px-6 text-center max-lg:items-start max-lg:pt-[calc(32vh+56px)]">
       <motion.div style={{ y }} className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(232,210,138,.35),transparent_65%)]" />
       <Slideshow started={started} />
       <div className="absolute inset-4 rounded-sm border border-gold/50 sm:inset-8" />
@@ -115,7 +148,7 @@ export default function Hero({ started }: { started: boolean }) {
         initial="hidden"
         animate={started ? "visible" : "hidden"}
         transition={{ staggerChildren: 0.35, delayChildren: 1 }}
-        className="relative z-10 pt-16"
+        className="relative z-10 pt-4 lg:pt-16"
       >
         <motion.p variants={item} className="text-xs uppercase tracking-[0.5em] text-maroon/80">The Wedding Of</motion.p>
         <motion.h1 variants={item} className="mt-6 font-script text-6xl leading-tight sm:text-8xl">
