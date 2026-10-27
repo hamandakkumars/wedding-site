@@ -48,7 +48,7 @@ function Petals() {
 const SLIDES = [
   { src: "/images/hero-window.jpg", pos: "50% 22%" },
   { src: "/images/hero-teal-arch.jpg", pos: "50% 25%" },
-  { src: "/images/hero-closeup.jpg", pos: "50% 4%" },
+  { src: "/images/hero-thatch.jpg", pos: "50% 72%" },
   { src: "/images/hero-walk.jpg", pos: "50% 30%" },
   { src: "/images/hero-temple.jpg", pos: "50% 30%" },
   { src: "/images/hero-stage.jpg", pos: "50% 35%" },
@@ -81,7 +81,7 @@ function Slideshow({ started }: { started: boolean }) {
         return (
           <div
             key={s.src}
-            className={`absolute inset-0 opacity-0 lg:w-[29%] ${
+            className={`absolute inset-0 opacity-0 max-lg:origin-top max-lg:[mask-image:linear-gradient(to_bottom,#000_45%,transparent_90%)] lg:w-[29%] ${
               i % 2 === 0
                 ? "lg:left-0 lg:[mask-image:linear-gradient(to_right,#000_68%,transparent)]"
                 : "lg:left-auto lg:right-0 lg:[mask-image:linear-gradient(to_left,#000_68%,transparent)]"
@@ -100,7 +100,7 @@ function Slideshow({ started }: { started: boolean }) {
               src={src}
               alt=""
               draggable={false}
-              loading={i === 0 ? "eager" : "lazy"}
+              decoding="async"
               className="absolute inset-0 h-full w-full object-cover max-lg:top-7 max-lg:h-[calc(100%-1.75rem)]"
               style={{ objectPosition: s.pos }}
             />
@@ -109,16 +109,16 @@ function Slideshow({ started }: { started: boolean }) {
               src={src}
               alt=""
               draggable={false}
-              loading={i === 0 ? "eager" : "lazy"}
+              decoding="async"
               className="absolute inset-x-0 top-0 h-7 w-full scale-y-[-1] object-cover object-top lg:hidden"
             />
           </div>
         );
       })}
-      {/* Phones: fade the band into the page with a cheap overlay (a CSS mask on
-          a container of animating images re-rasterised every frame and stuttered). */}
+      {/* Phones: each slide fades to fully transparent before the band's bottom edge
+          (the slow zoom grows the slide past the clipped container, so the fade must
+          finish by ~90% of the slide), so no hard edge shows against the page. */}
       <div className="absolute inset-x-0 top-0 h-[18%] bg-gradient-to-b from-ivory/30 to-transparent lg:hidden" />
-      <div className="absolute inset-x-0 bottom-0 h-[45%] bg-gradient-to-t from-ivory to-transparent lg:hidden" />
       <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(255,247,230,.62),rgba(255,247,230,.42)_45%,rgba(255,247,230,.75))] max-lg:hidden lg:opacity-10" />
     </motion.div>
   );

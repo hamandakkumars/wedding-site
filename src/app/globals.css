@@ -112,17 +112,18 @@ img {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(10px); }
 }
-/* 8 slides x 6s: each shows for 1/8 of the cycle (12.5%), overlapping fades. */
+/* 8 slides x 6s. Each stays at full opacity for ~1.4s past its slot, while the next
+   one fades in over it, so the two overlap and the page is never left empty. */
 @keyframes heroSlide {
-  0% { opacity: 0; transform: scale(1.04); }
+  0% { opacity: 0; transform: scale(1.02); }
   3% { opacity: 1; }
-  12.5% { opacity: 1; }
-  15.5% { opacity: 0; transform: scale(1.16); }
-  100% { opacity: 0; transform: scale(1.16); }
+  15.5% { opacity: 1; }
+  18.5% { opacity: 0; transform: scale(1.07); }
+  100% { opacity: 0; transform: scale(1.07); }
 }
 @keyframes tapPulse {
   0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(201,162,39,.55); }
-  50% { transform: scale(1.04); box-shadow: 0 0 0 12px rgba(201,162,39,0); }
+  50% { transform: scale(1.02); box-shadow: 0 0 0 12px rgba(201,162,39,0); }
 }
 @media (prefers-reduced-motion: reduce) {
   .tap-pulse { animation: none !important; }
