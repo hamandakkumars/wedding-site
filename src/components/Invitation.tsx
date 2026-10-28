@@ -1,8 +1,7 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import { wedding } from "@/data/wedding";
-import { withBase } from "@/lib/assetPath";
+import { useEffect, useState } from "react";
 import { useGuestName } from "@/lib/useGuestName";
+import { useMusic } from "@/lib/useMusic";
 import InviteCover from "./InviteCover";
 import Hero from "./Hero";
 import Blessing from "./Blessing";
@@ -15,11 +14,10 @@ import MusicToggle from "./MusicToggle";
 
 export default function Invitation() {
   const [open, setOpen] = useState(false);
-  const [playing, setPlaying] = useState(false);
   // Personalised greeting: /?to=Ravi%20%26%20Family — read client-side
   // (there's no server at request time on a static export).
   const guest = useGuestName();
-  const audio = useRef<HTMLAudioElement>(null);
+  const { audioProps, playing, play, toggle } = useMusic();
 
   // Always start at the top on reload instead of the browser-restored section.
   useEffect(() => {
@@ -33,20 +31,10 @@ export default function Invitation() {
     return () => { document.body.style.overflow = ""; };
   }, [open]);
 
-  const start = () => {
-    audio.current?.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
-  };
-  const toggle = () => {
-    const a = audio.current;
-    if (!a) return;
-    if (a.paused) a.play().then(() => setPlaying(true)).catch(() => {});
-    else { a.pause(); setPlaying(false); }
-  };
-
   return (
     <>
-      <audio ref={audio} src={withBase(wedding.music)} loop preload="none" />
-      <InviteCover onOpen={start} onReveal={() => setOpen(true)} guest={guest} />
+      <audio {...audioProps} />
+      <InviteCover onOpen={play} onReveal={() => setOpen(true)} guest={guest} />
       <main>
         <Hero started={open} />
         <Blessing />

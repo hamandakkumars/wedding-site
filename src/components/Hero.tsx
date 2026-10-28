@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { wedding } from "@/data/wedding";
 import { withBase } from "@/lib/assetPath";
 import TapReveal from "./TapReveal";
-import { Diya, Garland, Gopuram } from "./SouthIndian";
+import { Diya, Gopuram } from "./SouthIndian";
 
 // CSS-animated (not Framer Motion): Hero never unmounts, so its 16 petals
 // would otherwise run on the JS main thread for the entire visit, even long
@@ -92,25 +92,14 @@ function Slideshow({ started }: { started: boolean }) {
               willChange: "opacity, transform",
             } : undefined}
           >
-            {/* Phones: the photo sits just below the garland's top edge so the
-                faces clear it; a mirrored strip of the same photo fills the
-                space above, so the picture still reaches the top of the page. */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={src}
               alt=""
               draggable={false}
               decoding="async"
-              className="absolute inset-0 h-full w-full object-cover max-lg:top-7 max-lg:h-[calc(100%-1.75rem)]"
+              className="absolute inset-0 h-full w-full object-cover"
               style={{ objectPosition: s.pos }}
-            />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={src}
-              alt=""
-              draggable={false}
-              decoding="async"
-              className="absolute inset-x-0 top-0 h-7 w-full scale-y-[-1] object-cover object-top lg:hidden"
             />
           </div>
         );
@@ -139,7 +128,6 @@ export default function Hero({ started }: { started: boolean }) {
       <div className="absolute inset-6 rounded-sm border border-gold/25 sm:inset-11" />
       <Gopuram windowFill="#fff7e6" className="pointer-events-none absolute bottom-10 left-1/2 w-[min(56vw,340px)] -translate-x-1/2 text-maroon/[0.08]" />
       <div className="temple-border absolute inset-x-8 bottom-8 sm:inset-x-14" />
-      <Garland className="z-10 px-6 sm:px-14" />
       <Diya className="absolute bottom-[14%] left-[10%] z-10" />
       <Diya className="absolute bottom-[14%] right-[10%] z-10" />
       <Petals />

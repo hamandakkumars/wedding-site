@@ -1,8 +1,7 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
-import { wedding } from "@/data/wedding";
-import { withBase } from "@/lib/assetPath";
+import { useEffect, useState } from "react";
 import { useGuestName } from "@/lib/useGuestName";
+import { useMusic } from "@/lib/useMusic";
 import ModernBackground from "./ModernBackground";
 import ModernCover from "./ModernCover";
 import ModernHero from "./ModernHero";
@@ -16,11 +15,10 @@ import MusicToggle from "../MusicToggle";
 
 export default function ModernInvitation() {
   const [open, setOpen] = useState(false);
-  const [playing, setPlaying] = useState(false);
   // Personalised greeting: /?to=Ravi%20%26%20Family — read client-side
   // (there's no server at request time on a static export).
   const guest = useGuestName();
-  const audio = useRef<HTMLAudioElement>(null);
+  const { audioProps, playing, play, toggle } = useMusic();
 
   // Always start at the top: the cover has no fixed height of its own to
   // scroll against, so a browser-restored scroll position (e.g. on reload)
@@ -36,21 +34,11 @@ export default function ModernInvitation() {
     return () => { document.body.style.overflow = ""; };
   }, [open]);
 
-  const start = () => {
-    audio.current?.play().then(() => setPlaying(true)).catch(() => setPlaying(false));
-  };
-  const toggle = () => {
-    const a = audio.current;
-    if (!a) return;
-    if (a.paused) a.play().then(() => setPlaying(true)).catch(() => {});
-    else { a.pause(); setPlaying(false); }
-  };
-
   return (
     <div className="theme-modern text-ink">
       <ModernBackground />
-      <audio ref={audio} src={withBase(wedding.music)} loop preload="none" />
-      <ModernCover onOpen={start} onReveal={() => setOpen(true)} guest={guest} />
+      <audio {...audioProps} />
+      <ModernCover onOpen={play} onReveal={() => setOpen(true)} guest={guest} />
       <main>
         <ModernHero started={open} />
         <ModernBlessing />

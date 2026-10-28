@@ -13,14 +13,6 @@ function QualText({ completed, pursuing }: { completed?: string; pursuing: strin
   );
 }
 
-function QualLine(props: { completed?: string; pursuing: string }) {
-  return (
-    <p className="text-xs font-semibold uppercase tracking-[0.12em] text-[#8a3a1c]">
-      <QualText {...props} />
-    </p>
-  );
-}
-
 // Three distinct styles so name / qualifications / designation never blend
 // together: name is plain serif (identity), qualifications are small gold
 // tracked caps (a "credential" look), designation is italic and muted (a
@@ -50,17 +42,11 @@ export default function Blessing() {
         <Reveal x={-40} y={0}>
           <p className="text-xs uppercase tracking-[0.3em] text-maroon/70">Bride</p>
           <p className="name-text pt-2 font-script text-4xl leading-[1.3]">{wedding.bride.title} {wedding.bride.full}</p>
-          <div className="mt-2">
-            <QualLine {...wedding.bride.qualifications} />
-          </div>
           <p className="mt-2 font-serif text-ink/70">D/o {wedding.bride.father.name} &amp; {wedding.bride.mother.name}</p>
         </Reveal>
         <Reveal x={40} y={0}>
           <p className="text-xs uppercase tracking-[0.3em] text-maroon/70">Groom</p>
           <p className="name-text pt-2 font-script text-4xl leading-[1.3]">{wedding.groom.title} {wedding.groom.full}</p>
-          <div className="mt-2">
-            <QualLine {...wedding.groom.qualifications} />
-          </div>
           <p className="mt-2 font-serif text-ink/70">S/o {wedding.groom.father.name} &amp; {wedding.groom.mother.name}</p>
         </Reveal>
       </div>
@@ -90,14 +76,6 @@ export default function Blessing() {
           </div>
         </Reveal>
       </div>
-
-      <Reveal delay={0.1} className="mt-16">
-        <Ornament />
-        <p className="mt-6 font-serif text-lg italic text-maroon">{wedding.grandparents.heading}</p>
-        {wedding.grandparents.lines.map((line) => (
-          <p key={line} className="mt-1 text-sm text-ink/70">{line}</p>
-        ))}
-      </Reveal>
     </section>
   );
 }

@@ -4,8 +4,6 @@ export const wedding = {
     title: "Dr.",
     name: "Harini", // short first name — used in large display typography
     full: "Sri Harini S", // full given name, combined with title elsewhere as `${title} ${full}`
-    // `pursuing` is shown with a line over it — still studying, not yet completed.
-    qualifications: { completed: "MBBS", pursuing: "MRCP (UK)" },
     father: { name: "Sri. S Senthil Kumar", qualifications: "LL.B, M.Phil", designation: "Titan Company Ltd" },
     mother: { name: "Smt. K Sathya Nandhini", qualifications: "M.Sc. (N)", designation: "Principal, Meera Institution of Paramedical Sciences" },
   },
@@ -13,7 +11,6 @@ export const wedding = {
     title: "Dr.",
     name: "Sudharshan",
     full: "Sudharshan K",
-    qualifications: { completed: "MBBS", pursuing: "MRCS (UK)" },
     father: {
       name: "Dr. R. Kannan",
       qualifications: "MBBS, DTCD, DNB, MD, DM",
@@ -25,11 +22,6 @@ export const wedding = {
       designation: "Obstetrician & Gynaecologist, Sri Balakandhan Hospital",
     },
     brother: { name: "Mr. K. Shreecharan", qualifications: { pursuing: "B.E" } },
-  },
-  // Shown as a blessing line above both families.
-  grandparents: {
-    heading: "With Blessings of Grandparents",
-    lines: ["Mr. M. Subburaju & Mrs. S. Gowrammal", "(Late) Mr. N. Kasinathan & Mrs. T. Parvathi"],
   },
   hashtag: "#HariniWedsSudharshan",
   // Tamil accents (edit or clear for another language)
@@ -89,7 +81,7 @@ export const wedding = {
   // Kept as-is at the user's request (placeholder narrative, not real info).
   story: [
     { year: "8 Feb 2026", title: "Engagement", text: "Surrounded by family and friends, we exchanged rings and began our journey together.", photo: "/images/couple-engagement.jpg" },
-    { year: "2026", title: "Tying the Knot", text: "With our families beside us, we begin our beautiful life together.", photo: "/images/couple-temple.jpg" },
+    { year: "2026", title: "Tying the Knot", text: "With our families beside us, we begin our beautiful life together.", photo: "/images/couple-temple.jpg", pos: "center 40%" },
   ],
   // Photos live in /public/images (resized from /assets). Placeholders use gradients when empty.
   gallery: [
@@ -102,7 +94,8 @@ export const wedding = {
     "/images/couple-beach-rock.jpg",
     "/images/couple-beach-run.jpg",
   ] as string[],
-  music: "/music/wedding.mp3", // drop an mp3 here
+  music: "/music/How Else to Name It.mp3", // drop an mp3 here
+  musicStart: 10, // seconds into the track to start (and loop back to)
 };
 export type Wedding = typeof wedding;
 export type Reception = Wedding["receptions"][number];

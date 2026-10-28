@@ -13,14 +13,6 @@ function QualText({ completed, pursuing }: { completed?: string; pursuing: strin
   );
 }
 
-function QualLine(props: { completed?: string; pursuing: string }) {
-  return (
-    <p className="text-xs font-semibold uppercase tracking-[0.12em] text-gold">
-      <QualText {...props} />
-    </p>
-  );
-}
-
 // Three distinct styles so name / qualifications / designation never blend
 // together: name is plain serif (identity), qualifications are small gold
 // tracked caps (a "credential" look), designation is italic and muted (a
@@ -48,17 +40,11 @@ export default function ModernBlessing() {
         <Reveal x={-30} y={0}>
           <p className="text-xs uppercase tracking-[0.3em] text-maroon/80">Bride</p>
           <p className="modern-grad-text mt-2 font-serif text-3xl">{wedding.bride.title} {wedding.bride.full}</p>
-          <div className="mt-2">
-            <QualLine {...wedding.bride.qualifications} />
-          </div>
           <p className="mt-2 text-sm text-ink/80">D/o {wedding.bride.father.name} &amp; {wedding.bride.mother.name}</p>
         </Reveal>
         <Reveal x={30} y={0}>
           <p className="text-xs uppercase tracking-[0.3em] text-maroon/80">Groom</p>
           <p className="modern-grad-text mt-2 font-serif text-3xl">{wedding.groom.title} {wedding.groom.full}</p>
-          <div className="mt-2">
-            <QualLine {...wedding.groom.qualifications} />
-          </div>
           <p className="mt-2 text-sm text-ink/80">S/o {wedding.groom.father.name} &amp; {wedding.groom.mother.name}</p>
         </Reveal>
       </div>
@@ -86,14 +72,6 @@ export default function ModernBlessing() {
           </div>
         </Reveal>
       </div>
-
-      <Reveal delay={0.1} className="mt-16">
-        <ModernDivider />
-        <p className="mt-6 font-serif text-lg italic text-ink">{wedding.grandparents.heading}</p>
-        {wedding.grandparents.lines.map((line) => (
-          <p key={line} className="mt-1 text-sm text-ink/80">{line}</p>
-        ))}
-      </Reveal>
     </section>
   );
 }

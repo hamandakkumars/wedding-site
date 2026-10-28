@@ -26,6 +26,8 @@ export default function Story() {
                       src={withBase(s.photo)}
                       alt={`${wedding.bride.name} and ${wedding.groom.name} — ${s.title}`}
                       className="aspect-[4/3] w-full object-cover object-top"
+                      // Per-photo crop for the 4:3 frame (defaults to the top).
+                      style={"pos" in s ? { objectPosition: s.pos } : undefined}
                       loading="lazy"
                     />
                   )}
