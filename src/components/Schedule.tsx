@@ -56,7 +56,7 @@ export default function Schedule() {
 
       <Reveal delay={0.1} className="mt-14 text-center">
         <Ornament />
-        <p className="name-text mx-auto mt-6 max-w-xl pt-2 font-script text-3xl leading-[1.4] sm:text-4xl">{schedule.tagline}</p>
+        <p className="mx-auto mt-6 max-w-xl font-serif text-2xl italic leading-relaxed text-ink/85 sm:text-3xl">{schedule.tagline}</p>
       </Reveal>
     </section>
   );
