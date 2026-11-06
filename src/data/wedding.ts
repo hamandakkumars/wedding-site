@@ -124,6 +124,7 @@ export const wedding = {
   ] as string[],
   music: "/music/How Else to Name It.mp3", // drop an mp3 here
   musicStart: 10, // seconds into the track to start (and loop back to)
+  musicVolume: 0.5, // share of the device volume (0.5 = half: 100% → 50%, 70% → 35%)
 };
 export type Wedding = typeof wedding;
 export type Reception = Wedding["receptions"][number];

@@ -8,12 +8,34 @@ import { withBase } from "./assetPath";
 // restart from 0:00). Spread `audioProps` onto an <audio> element.
 export function useMusic() {
   const audio = useRef<HTMLAudioElement>(null);
+  const ctx = useRef<AudioContext | null>(null);
   const [playing, setPlaying] = useState(false);
   const from = wedding.musicStart;
+
+  // Play at `musicVolume` of the device volume. iOS Safari ignores
+  // `audio.volume`, so route the element through a Web Audio gain node
+  // instead; it's created on the first tap, since browsers only allow
+  // audio to start from a user gesture.
+  const applyVolume = (a: HTMLAudioElement) => {
+    if (!ctx.current) {
+      try {
+        const c = new AudioContext();
+        const gain = c.createGain();
+        gain.gain.value = wedding.musicVolume;
+        c.createMediaElementSource(a).connect(gain).connect(c.destination);
+        ctx.current = c;
+      } catch {
+        a.volume = wedding.musicVolume;
+        return;
+      }
+    }
+    if (ctx.current.state === "suspended") ctx.current.resume().catch(() => {});
+  };
 
   const play = () => {
     const a = audio.current;
     if (!a) return;
+    applyVolume(a);
     if (a.currentTime < from) a.currentTime = from;
     a.play().catch(() => setPlaying(false));
   };
