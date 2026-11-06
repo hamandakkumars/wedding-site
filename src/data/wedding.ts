@@ -78,6 +78,34 @@ export const wedding = {
         "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2776151.120692316!2d76.00843166442388!3d12.59967399393948!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae7f003c7fe0c9%3A0x3ab5f8085ff28951!2sCHILI%20PILI%20RESORT!5e0!3m2!1sen!2sin!4v1791312511194!5m2!1sen!2sin",
     },
   ],
+  // Two-day programme at the Yercaud wedding, shown in its own section.
+  schedule: {
+    title: "Wedding Celebration",
+    dates: "14th & 15th November",
+    tagline: "Two Days of Love, Laughter, Traditions & Togetherness",
+    days: [
+      {
+        label: "Day 1", day: "14", month: "Nov",
+        items: [
+          { time: "10:00 AM onwards", title: "Guest Check-in & Welcome", icon: "🌸" },
+          { time: "12:00 PM", title: "Lunch", icon: "🍛" },
+          { time: "4:00 PM onwards", title: "Wedding Formalities", icon: "📜" },
+          { time: "5:00 PM – 10:00 PM", title: "Get-together, Fun Games & Entertainment", icon: "🎉" },
+          { time: "Evening", title: "DJ & Dinner", icon: "🎶" },
+        ],
+      },
+      {
+        label: "Day 2", day: "15", month: "Nov",
+        items: [
+          { time: "3:30 AM", title: "Nalungu Ceremony", icon: "🪔" },
+          { time: "7:30 AM", title: "Breakfast (Tiffin)", icon: "☕" },
+          { time: "8:00 AM onwards", title: "Wedding Rituals", icon: "💍" },
+          { time: "12:00 Noon", title: "Grand Wedding Lunch", icon: "🍽️" },
+          { time: "2:00 PM", title: "Check-out", icon: "🧳" },
+        ],
+      },
+    ] as { label: string; day: string; month: string; items: { time: string; title: string; icon: string }[] }[],
+  },
   // Kept as-is at the user's request (placeholder narrative, not real info).
   story: [
     { year: "8 Feb 2026", title: "Engagement", text: "Surrounded by family and friends, we exchanged rings and began our journey together.", photo: "/images/couple-engagement.jpg" },

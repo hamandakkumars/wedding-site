@@ -9,6 +9,7 @@ import ModernBlessing from "./ModernBlessing";
 import ModernCountdown from "./ModernCountdown";
 import ModernStory from "./ModernStory";
 import ModernReceptions from "./ModernReceptions";
+import ModernSchedule from "./ModernSchedule";
 import ModernGallery from "./ModernGallery";
 import ModernFooter from "./ModernFooter";
 import MusicToggle from "../MusicToggle";
@@ -45,6 +46,7 @@ export default function ModernInvitation() {
         <ModernCountdown />
         <ModernStory />
         <ModernReceptions />
+        <ModernSchedule />
         <ModernGallery />
       </main>
       <ModernFooter />

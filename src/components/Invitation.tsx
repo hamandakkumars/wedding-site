@@ -8,6 +8,7 @@ import Blessing from "./Blessing";
 import Countdown from "./Countdown";
 import Story from "./Story";
 import Receptions from "./Receptions";
+import Schedule from "./Schedule";
 import Gallery from "./Gallery";
 import Footer from "./Footer";
 import MusicToggle from "./MusicToggle";
@@ -41,6 +42,7 @@ export default function Invitation() {
         <Countdown />
         <Story />
         <Receptions />
+        <Schedule />
         <Gallery />
       </main>
       <Footer />
