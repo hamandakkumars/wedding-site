@@ -109,7 +109,7 @@ export const wedding = {
   // Kept as-is at the user's request (placeholder narrative, not real info).
   story: [
     { year: "8 Feb 2026", title: "Engagement", text: "Surrounded by family and friends, we exchanged rings and began our journey together.", photo: "/images/couple-engagement.jpg" },
-    { year: "2026", title: "Tying the Knot", text: "With our families beside us, we begin our beautiful life together.", photo: "/images/couple-temple.jpg", pos: "center 40%" },
+    { year: "15 Nov 2026", title: "Tying the Knot", text: "With our families beside us, we begin our beautiful life together.", photo: "/images/couple-temple.jpg", pos: "center 40%" },
   ],
   // Photos live in /public/images (resized from /assets). Placeholders use gradients when empty.
   gallery: [
