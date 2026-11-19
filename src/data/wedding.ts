@@ -28,27 +28,13 @@ export const wedding = {
   tamilTitle: "வரவேற்பு அழைப்பிதழ்",
   blessing:
     "Two hearts, one journey. With the blessings of our elders, we begin this beautiful new chapter together — and we'd love for you to celebrate with us.",
-  // The wedding ceremony plus two reception events, each with its own date,
-  // venue and map, listed in the order a guest would attend them
-  // (chronological). `type` drives "Wedding" vs "Reception" copy and icon.
+  // The reception events, each with its own date, venue and map, listed in
+  // the order a guest would attend them (chronological). `type` drives
+  // "Wedding" vs "Reception" copy and icon.
   receptions: [
     {
-      id: "yercaud",
-      type: "wedding" as const,
-      city: "Yercaud",
-      icon: "ring",
-      date: "15 Nov 2026",
-      time: "9:00 AM onwards",
-      start: "2026-11-15T09:00:00+05:30",
-      end: "2026-11-15T10:30:00+05:30",
-      venue: "Bison Rise Resorts",
-      address: "Near Chakra Mahameru Temple, Nagalur Village, Yercaud, Salem",
-      mapUrl: "https://www.google.com/maps?q=11.8434198,78.2145438",
-      mapEmbed: "https://www.google.com/maps?q=11.8434198,78.2145438&output=embed",
-    },
-    {
       id: "tiruvannamalai",
-      type: "reception" as const,
+      type: "reception" as "wedding" | "reception",
       city: "Tiruvannamalai",
       icon: "glass",
       date: "20 Nov 2026",
@@ -64,7 +50,7 @@ export const wedding = {
     },
     {
       id: "hosur",
-      type: "reception" as const,
+      type: "reception" as "wedding" | "reception",
       city: "Hosur",
       icon: "glass",
       date: "22 Nov 2026",
@@ -78,38 +64,10 @@ export const wedding = {
         "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2776151.120692316!2d76.00843166442388!3d12.59967399393948!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae7f003c7fe0c9%3A0x3ab5f8085ff28951!2sCHILI%20PILI%20RESORT!5e0!3m2!1sen!2sin!4v1791312511194!5m2!1sen!2sin",
     },
   ],
-  // Two-day programme at the Yercaud wedding, shown in its own section.
-  schedule: {
-    title: "Wedding Celebration",
-    dates: "14th & 15th November",
-    tagline: "Two Days of Love, Laughter, Traditions & Togetherness",
-    days: [
-      {
-        label: "Day 1", day: "14", month: "Nov",
-        items: [
-          { time: "10:00 AM onwards", title: "Guest Check-in & Welcome", icon: "🌸" },
-          { time: "12:00 PM", title: "Lunch", icon: "🍛" },
-          { time: "4:00 PM onwards", title: "Wedding Formalities", icon: "📜" },
-          { time: "5:00 PM – 10:00 PM", title: "Get-together, Fun Games & Entertainment", icon: "🎉" },
-          { time: "Evening", title: "DJ & Dinner", icon: "🎶" },
-        ],
-      },
-      {
-        label: "Day 2", day: "15", month: "Nov",
-        items: [
-          { time: "3:30 AM", title: "Nalungu Ceremony", icon: "🪔" },
-          { time: "7:30 AM", title: "Breakfast (Tiffin)", icon: "☕" },
-          { time: "8:00 AM onwards", title: "Wedding Rituals", icon: "💍" },
-          { time: "12:00 Noon", title: "Grand Wedding Lunch", icon: "🍽️" },
-          { time: "2:00 PM", title: "Check-out", icon: "🧳" },
-        ],
-      },
-    ] as { label: string; day: string; month: string; items: { time: string; title: string; icon: string }[] }[],
-  },
   // Kept as-is at the user's request (placeholder narrative, not real info).
   story: [
     { year: "8 Feb 2026", title: "Engagement", text: "Surrounded by family and friends, we exchanged rings and began our journey together.", photo: "/images/couple-engagement.jpg" },
-    { year: "15 Nov 2026", title: "Tying the Knot", text: "With our families beside us, we begin our beautiful life together.", photo: "/images/couple-temple.jpg", pos: "center 40%" },
+    { year: "15 Nov 2026", title: "Tied the Knot", text: "With our families beside us, we began our beautiful life together.", photo: "/images/couple-temple.jpg", pos: "center 40%" },
   ],
   // Photos live in /public/images (resized from /assets). Placeholders use gradients when empty.
   gallery: [
