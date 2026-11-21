@@ -148,7 +148,7 @@ export default function Hero({ started }: { started: boolean }) {
         <motion.p variants={item} className="font-tamil mt-1 text-sm text-maroon/80">{wedding.tamilTitle}</motion.p>
         <motion.div variants={item} className="mx-auto mt-8 max-w-md sm:max-w-xl">
           <TapReveal
-            label="✦  Tap for the dates  ✦"
+            label="✦  Tap for the date  ✦"
             className="flex flex-col items-center justify-center px-4 py-5 font-serif text-base text-maroon"
           >
             <div className="flex items-start justify-center gap-4 sm:gap-8">
