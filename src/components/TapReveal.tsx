@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 // Gold button over `children`; one tap opens it and fades the content in.
 export default function TapReveal({
-  children, className = "", label = "✦  Tap for the dates  ✦",
+  children, className = "", label = "✦  Tap for the date  ✦",
 }: { children: React.ReactNode; className?: string; label?: string }) {
   const [open, setOpen] = useState(false);
 
