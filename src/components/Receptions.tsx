@@ -8,7 +8,7 @@ const icons: Record<string, string> = { ring: "💍", flame: "🪔", glass: "�
 export default function Receptions() {
   return (
     <section id="receptions" className="bg-maroon/[0.04] px-6 py-24">
-      <SectionTitle kicker="Join the celebration" title="Our Celebrations" />
+      <SectionTitle kicker="Join the celebration" title="Our Celebration" />
       <div className="mx-auto grid max-w-5xl gap-8 md:grid-cols-2">
         {wedding.receptions.map((r, i) => {
           // A lone odd-one-out card in the last row would otherwise sit in
