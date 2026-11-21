@@ -33,22 +33,6 @@ export const wedding = {
   // "Wedding" vs "Reception" copy and icon.
   receptions: [
     {
-      id: "tiruvannamalai",
-      type: "reception" as "wedding" | "reception",
-      city: "Tiruvannamalai",
-      icon: "glass",
-      date: "20 Nov 2026",
-      time: "6:30 PM onwards",
-      // ISO with timezone (IST). Used for this reception's countdown + calendar.
-      start: "2026-11-20T18:30:00+05:30",
-      end: "2026-11-20T21:30:00+05:30",
-      venue: "Andal Singaravelu Thirumana Mahal",
-      address: "Vengikkal, Tiruvannamalai",
-      mapUrl: "https://maps.app.goo.gl/HyzTCP1gKWpxZMTw7",
-      mapEmbed:
-        "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7797.6049327328!2d79.05833269357912!3d12.26164290000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bacc0fe57aaaaab%3A0x5ee610624419a92c!2sAndal%20Singaravelu%20Thirumana%20Mahal!5e0!3m2!1sen!2sin!4v1791312733126!5m2!1sen!2sin",
-    },
-    {
       id: "hosur",
       type: "reception" as "wedding" | "reception",
       city: "Hosur",
