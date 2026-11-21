@@ -72,7 +72,7 @@ export default function Countdown() {
 
   return (
     <section id="countdown" className="bg-maroon/[0.04] px-6 py-24">
-      <SectionTitle kicker="Save the dates" title="Counting Down" />
+      <SectionTitle kicker="Save the date" title="Counting Down" />
       <div className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-2">
         {wedding.receptions.map((r, i) => {
           // A lone odd-one-out card in the last row would otherwise sit in
